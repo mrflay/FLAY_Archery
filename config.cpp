@@ -47,19 +47,19 @@ class CfgVehicles
 	//	class EventHandlers: FLAY_DefaultEventhandlers {};
 	//};
 	
-	class CAManBase: Man {};
-	class Civilian: CAManBase {};
-	class Woodlander: Civilian {};
-	class FLAY_BowHunter: Woodlander {
-		access=2;
-		displayName="Bow Hunter";
-		faction = "CIV";
-		vehicleClass = "Men";
-		camouflage = 1;
-		accuracy = 2.0;
-		weapons[]={"Throw","Put","FLAY_CompoundBow_Berkut"};
-		magazines[]={"300Rnd_Regulararrows","300Rnd_FastArrows","300Rnd_ExplosiveArrows","300Rnd_FlameArrows"};
-	};
+	//class CAManBase: Man {};
+	//class Civilian: CAManBase {};
+	//class Woodlander: Civilian {};
+	//class FLAY_BowHunter: Woodlander {
+	//	access=2;
+	//	displayName="Bow Hunter";
+	//	faction = "CIV";
+	//	vehicleClass = "Men";
+	//	camouflage = 1;
+	//	accuracy = 2.0;
+	//	weapons[]={"Throw","Put","FLAY_CompoundBow_Berkut"};
+	//	magazines[]={"300Rnd_Regulararrows","300Rnd_FastArrows","300Rnd_ExplosiveArrows","300Rnd_FlameArrows"};
+	//};
 	
 	class FLAY_Arrow_Broadhead: Static
 	{
@@ -94,10 +94,11 @@ class cfgWeapons
 		scope = 1;
 		model="\FLAY\FLAY_Archery\FLAY_CompoundBow_Berkut.p3d";
 		autoAimEnabled = 0;
-		cursor = "Air_W_MG";
-		cursorAim = "Air_Dot";
-		cursorSize = 1;
-		showAimCursorInternal = 1;
+		//cursor = "Air_W_MG";
+		//cursorAim = "Air_Dot";
+		//cursorSize = 1;
+		//showAimCursorInternal = 1;
+		//handAnim[] = {"OFP2_ManSkeleton","\FLAY\FLAY_Archery\anims\berkut\berkutAnim.rtm"};
 		value = 0;
 		type = 1;
 		displayName = "Berkut Compound Bow";
@@ -105,9 +106,9 @@ class cfgWeapons
 		muzzles[] = {"RegularArrowsMuzzle","FastArrowsMuzzle","ExplosiveArrowsMuzzle","FlameArrowsMuzzle"};
 		class CompoundBowMuzzle: GrenadeLauncher
 		{
-			cursor = "Air_W_MG";
-			cursorAim = "Air_Dot";
-			cursorSize = 1;
+			//cursor = "Air_W_MG";
+			//cursorAim = "Air_Dot";
+			//cursorSize = 1;
 			sound[] = {"",0.00031622776,1};
 			reloadSound[] = {"",0.00031622776,1};
 			aiDispersionCoefX = 6;
@@ -117,14 +118,14 @@ class cfgWeapons
 			enableAttack = 0;
 			showEmpty = 0;
 			autoReload = 1;
-			modelOptics = "";
+			modelOptics = "-";
 			minRange = 5;
 			minRangeProbab = 0.5;
 			midRange = 50;
 			midRangeProbab = 0.2;
 			maxRange = 100;
 			maxRangeProbab = 0.03;
-			begin1[] = {"ca\sounds\weapons\hits\hit_earth_01",0.056234132,1,60};
+			begin1[] = {"FLAY\FLAY_Archery\data\sounds\bowrelease01.ogg",10.0,1,60};
 			soundBegin[] = {"begin1",1};
 			recoil="Empty";
 			recoilProne="Empty";
@@ -143,8 +144,8 @@ class cfgWeapons
 			//opticsPPEffects[] = {"OpticsCHAbera2","OpticsBlur2"};
 			//opticsZoomMin = 0.0623;
 			//opticsZoomMax = 0.0623;
-			distanceZoomMin = 50;
-			distanceZoomMax = 50;
+			distanceZoomMin = 100;
+			distanceZoomMax = 1;
 			opticsFlare = 1;
 			opticsDisablePeripherialVision = 1;
 		};
@@ -170,6 +171,20 @@ class cfgWeapons
 			magazines[] = {"300Rnd_FlameArrows"};
 		};
 	};
+	
+	class FLAY_RecurveBow_Haraburdi: FLAY_CompoundBow_Berkut
+	{
+		scope = 1;
+		model="\FLAY\FLAY_Archery\FLAY_RecurveBow_Haraburdi.p3d";
+		displayName = "Haraburdi Recurve Bow";
+	};
+	
+	class FLAY_LongBow_Luk: FLAY_CompoundBow_Berkut
+	{
+		scope = 1;
+		model="\FLAY\FLAY_Archery\FLAY_LongBow_Luk.p3d";
+		displayName = "Luk Longbow";
+	};	
 };
 
 
@@ -374,7 +389,7 @@ class CfgMovesMaleSdr: CfgMovesBasic
 		class AmovPercMstpSrasWrflDnon;
 		class BowAim: AmovPercMstpSrasWrflDnon
 		{
-			file = "\FLAY\FLAY_Archery\anims\bowaim.rtm";
+			file = "\FLAY\FLAY_Archery\anims\bowaim1.rtm";
 			actions = "RifleStandActions";
 			looped = 0;
 			speed = 0.5;
@@ -430,9 +445,9 @@ class CfgGesturesMale
 		{
 			file = "\FLAY\FLAY_Archery\anims\bowaim1.rtm";
 			looped = 1;
-			speed = 0.5;
-			//mask = "handsWeapon";
-			mask = "upperTorso";
+			speed = 0;
+			mask = "handsWeapon";
+			//mask = "upperTorso";
 			interpolateTo[] = {"BowStandGesture", 1};
 			interpolateFrom[] = {"BowStandGesture", 1};
 			disableWeapons = 0;
