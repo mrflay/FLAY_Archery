@@ -1,2 +1,3 @@
 _unit = _this select 0;
-//player sideChat "bow_hit.sqf";
+_projectile = _this select 1;
+_damage = _this select 2;

@@ -1,1 +1,0 @@
-hint "bow_killed.sqf";
