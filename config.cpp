@@ -4,26 +4,29 @@ class CfgPatches
  {
 	requiredaddons[] = {};
 	requiredversion = 0.1;
-	units[] = {};
+	units[] = {"FLAY_Target_FITA_122","FLAY_Target_Fold"};
 	weapons[] = {"FLAY_CompoundBow","FLAY_RecurveBow","FLAY_Arrow"};
 	magazines[] = {"FLAY_1Rnd_RegularArrow","FLAY_1Rnd_BroadheadArrow","FLAY_1Rnd_ExplosiveArrow","FLAY_1Rnd_SmokeArrow","FLAY_1Rnd_FlareArrow"};
  };
 };
 
 class DefaultEventHandlers;
+class Mode_SemiAuto;
+class Mode_Burst;
+class Mode_FullAuto;
 
 class CfgVehicles {
 
 	class Man;
 	class CAManBase {
-	//	class EventHandlers: DefaultEventHandlers {
-	//		init = "_scr = _this execVM ""tb_arifle_hkump45\scripts\bow_init.sqf"";";
-	//		fired = "_this call FLAY_Effects_EH_Fired;";
-	//		killed = "_this call FLAY_Effects_EH_Killed;";
-	//		handledamage = "_this call FLAY_EH_HandleDamage;";
-	//		hitpart = "_this call FLAY_EH_HitPart;";
-	//		hit = "_this call FLAY_EH_Hit;";	
-	//	};	
+		class EventHandlers: DefaultEventHandlers {
+			init = "_scr = _this execVM ""tb_arifle_hkump45\scripts\bow_init.sqf"";";
+			fired = "_this call FLAY_Effects_EH_Fired;";
+			killed = "_this call FLAY_Effects_EH_Killed;";
+			handledamage = "_this call FLAY_EH_HandleDamage;";
+			hitpart = "_this call FLAY_EH_HitPart;";
+			hit = "_this call FLAY_EH_Hit;";	
+		};	
 	};
 
 	class Static;
@@ -36,26 +39,31 @@ class CfgVehicles {
 	};
 	
 	class Thing;
-	class FLAY_ArrowPlaceholder: Thing
+	class FLAY_ArrowThing: Thing
+	{
+		scope = 1;
+		displayName = "Arrow Thing";
+		model = "\tb_arifle_hkump45\FLAY_Arrow.p3d";
+		vehicleClass = "Misc";
+	};
+	
+	class FLAY_ArrowPlaceholder: Static
 	{
 		scope = 1;
 		displayName = "FLAY_ArrowPlaceholder";
 		model = "\A3\Weapons_f\empty";
-		vehicleClass = "Targets";
 		class EventHandlers;
 	};
 	
-	class FLAY_Target_FITA_122: Thing
+	class TargetBase;
+	class FLAY_Target_FITA_122: TargetBase
 	{
-		class EventHandlers: DefaultEventHandlers {
-			handledamage = "_this call FLAY_EH_HandleDamage;";
-			hitpart = "_this call FLAY_EH_HitPart;";
-			hit = "_this call FLAY_EH_Hit;";	
-		};	
-		scope = 1;
+		scope = 2;
 		displayName = "FITA 122";
 		model = "\tb_arifle_hkump45\FLAY_Target_FITA_122.p3d";
-		vehicleClass = "Targets";
+		class EventHandlers {
+			hitpart = "_this execVM '\tb_arifle_hkump45\scripts\target_hitpart.sqf';";
+		};			
 	};
 	
 	class test_EmptyObjectForBubbles;
@@ -85,16 +93,14 @@ class CfgWeapons {
 		uipicture = "\A3\weapons_f\data\UI\icon_regular_CA.paa";
 		model = "";
 		handanim[] = {"OFP2_ManSkeleton","tb_arifle_hkump45\anim\handanim_recurvebow.rtm"};
+		
 		autoReload = 0;
-		reloadAction = "GestureReset";
-		reloadmagazinesound[] = {"A3\sounds_f\weapons\reloads\new_trg.wav", 0.1, 1, 30};
-		reloadsound[] = {"", 1, 1};
-		reloadtime = 0.15;
+		//reloadAction = "GestureReloadArrow";
+		//reloadmagazinesound[] = {"A3\sounds_f\weapons\reloads\new_trg.wav", 0.1, 1, 30};
+		//reloadsound[] = {"", 1, 1};
 		
 		muzzles[] = {
-			"RegularArrowMuzzle"
-			,"BroadheadArrowMuzzle"
-			,"ExplosiveArrowMuzzle"
+			"ArrowMuzzle"
 			// hacks
 			,"DummyReloadBackQuiverMuzzle"
 			,"DummyReloadBowQuiverMuzzle"
@@ -105,72 +111,49 @@ class CfgWeapons {
 		{
 			displayName = "Compound Bow";
 			cursor = "EmptyCursor";
-			cursoraim = "mg";
-			//cursor = "arifle";
-			//cursoraim = "CursorAim";
+			cursoraim = "arifle";
+			magazines[] = {
+				"FLAY_1Rnd_RegularArrow",
+				,"FLAY_1Rnd_PrecisionArrow"
+				,"FLAY_1Rnd_BroadheadArrow"
+				,"FLAY_1Rnd_ExplosiveArrow"
+			};
+
+			reloadAction = "GestureReloadArrowAndFireAi"; // only used by ai, because player reloads from other muzzles.
+			discreteDistance[] = {30};
+			discreteDistanceInitIndex = 0;			
 			sound[] = {"",0.00031622776,1};
 			reloadSound[] = {"",0.00031622776,1};
-			aiDispersionCoefX = 6;
-			aiDispersionCoefY = 6;
-			showEmpty = 0;
-			autoReload = 1;
-			reloadTime = 0;
+			showEmpty = 1;
+			autoReload = 1; 
+			reloadTime = 0; 
 			magazineReloadTime = 0;
-			enableAttack = 0;
+			enableAttack = 1;
 			modelOptics = "-";
-			minRange = 5;
-			minRangeProbab = 0.5;
-			midRange = 50;
-			midRangeProbab = 0.2;
-			maxRange = 100;
-			maxRangeProbab = 0.03;
 			begin1[] = {"tb_arifle_hkump45\sound\bowrelease02.ogg",5,1,30};
 			soundBegin[] = {"begin1",1};
 			recoil="Empty";
 			recoilProne="Empty";
-		};
-		
-		class RegularArrowMuzzle: ArrowMuzzle
-		{
-			magazines[] = {"FLAY_1Rnd_RegularArrow"};
-			minRange = 5;
-			minRangeProbab = 0.01;
-			midRange = 50;
-			midRangeProbab = 0.1;
-			maxRange = 100;
-			maxRangeProbab = 0.01;
-			modelOptics = "-";
 			distanceZoomMin = 100;
 			distanceZoomMax = 1;
 			opticsFlare = 1;
 			opticsDisablePeripherialVision = 1;
-		};
-		
-		class BroadheadArrowMuzzle: ArrowMuzzle
-		{
-			cursor = "arifle";
-			cursoraim = "CursorAim";
-			magazines[] = {"FLAY_1Rnd_BroadheadArrow"};
-			minRange = 5;
-			minRangeProbab = 0.01;
-			midRange = 50;
-			midRangeProbab = 0.1;
-			maxRange = 200;
-			maxRangeProbab = 0.01;
-		}
-		
-		class ExplosiveArrowMuzzle: ArrowMuzzle
-		{
-			cursorAim = "gl";
-			cursor = "EmptyCursor";			
-			magazines[] = {
-				"FLAY_1Rnd_ExplosiveArrow"
-				//,"FLAY_1Rnd_SmokeArrow"
-				//,"FLAY_1Rnd_FlareArrow_Red"
-				//,"FLAY_1Rnd_FlameArrow"
-			};
-		};
 
+			aiDispersionCoefX = 15.0;
+			aiDispersionCoefY = 20.0;
+			aiRateOfFire = 2.0;
+			aiRateOfFireDistance=100;
+			minRange = 5;
+			minRangeProbab = 0.8;
+			midRange = 50;
+			midRangeProbab = 0.8;
+			maxRange = 800;
+			maxRangeProbab = 0.8;
+
+			value = 10;
+			cost = 0;
+		};
+		
 		class DummyReloadBackQuiverMuzzle: ArrowMuzzle
 		{
 			magazineReloadTime=1;
@@ -208,7 +191,7 @@ class CfgWeapons {
 			magazines[] = {"FLAY_1Rnd_DummyArrow2"};
 			reloadAction = "GestureReloadArrow";
 		};
-		
+				
 		class Library {
 			libtextdesc = "";
 		};
@@ -225,6 +208,7 @@ class CfgWeapons {
 					,"FLAY_point_Field"
 					,"FLAY_point_Target"
 					,"FLAY_point_Precision"
+					,"FLAY_point_Debug"
 				};
 				displayname = "Arrow Slot";
 				linkproxy = "\A3\data_f\proxies\weapon_slots\MUZZLE";
@@ -272,25 +256,25 @@ class CfgWeapons {
 	
 	class FLAY_CompoundBow: FLAY_Archery_Bow {
 		scope = 2;
-		displayName = "Night Hawk";
+		displayName = "Compound Bow";
 		descriptionshort = "Compound Bow<br />Draw Length: 28""<br />Draw Weight: 65 lbs<br />String: 58.5""";		
 		picture = "\tb_arifle_hkump45\UI\gear_flay_nighthawk_x_ca";
 		model = "tb_arifle_hkump45\FLAY_CompoundBow";
 		handanim[] = {"OFP2_ManSkeleton","tb_arifle_hkump45\anim\handanim_compoundbow.rtm"};
 		class Library {
-			libtextdesc = "Night Hawk Compound Bow";
+			libtextdesc = "Compound Bow";
 		};
 	};
 	
 	class FLAY_RecurveBow: FLAY_Archery_Bow {
 		scope = 2;
-		displayName = "Classic";
+		displayName = "Recurve Bow";
 		descriptionshort = "Recurve Bow<br />Draw Length: 28""<br />Draw Weight: 60 lbs<br />String: 58.5""";		
-		picture = "\tb_arifle_hkump45\UI\gear_flay_nighthawk_x_ca";
+		picture = "\tb_arifle_hkump45\UI\gear_flay_recurve_x_ca";
 		model = "tb_arifle_hkump45\FLAY_RecurveBow";
 		handanim[] = {"OFP2_ManSkeleton","tb_arifle_hkump45\anim\handanim_recurvebow.rtm"};
 		class Library {
-			libtextdesc = "Night Hawk Compound Bow";
+			libtextdesc = "Recurve Bow";
 		};	
 	};
 	
@@ -308,11 +292,11 @@ class CfgMagazines {
 
 	class CA_Magazine;
 	class FLAY_1Rnd_RegularArrow : CA_Magazine {
-		displayname = "Precision Arrow";
+		displayname = "Arrow";
 		displayNameShort = "Arrow";
 		descriptionshort = "FLAY_1Rnd_RegularArrow";
 		picture = "\tb_arifle_hkump45\UI\gear_flay_arrow_ca";
-		model = "tb_arifle_hkump45\hkump_mag";
+		model = "tb_arifle_hkump45\FLAY_Arrow";
 		ammo = "B_RegularArrow";
 		count = 1;
 		initspeed = 100;
@@ -320,6 +304,22 @@ class CfgMagazines {
 		scope = 2;
 		tracersevery = 0;
 	};	
+	class FLAY_1Rnd_PrecisionArrow: CA_Magazine
+	{
+		scope = 2;
+		value = 1;
+		displayName = "Precision Arrow";
+		displayNameShort = "Precision";
+		descriptionShort = "FLAY_1Rnd_PrecisionArrow";
+		picture = "\tb_arifle_hkump45\UI\gear_flay_arrow_ca";
+		model = "tb_arifle_hkump45\FLAY_Arrow";
+		type = 256;
+		ammo = "B_PrecisionArrow";
+		count = 1;
+		initSpeed = 120;
+		nameSound = "";
+		maxLeadSpeed = 50;
+	};
 	class FLAY_1Rnd_BroadheadArrow: CA_Magazine
 	{
 		scope = 2;
@@ -328,13 +328,14 @@ class CfgMagazines {
 		displayNameShort = "Broadhead";
 		descriptionShort = "FLAY_1Rnd_BroadheadArrow";
 		picture = "\tb_arifle_hkump45\UI\gear_flay_arrow_ca";
+		model = "tb_arifle_hkump45\FLAY_Arrow";
 		type = 256;
 		ammo = "B_BroadheadArrow";
 		count = 1;
-		initSpeed = 160;
+		initSpeed = 90;
 		nameSound = "";
 		maxLeadSpeed = 50;
-	};	
+	};		
 	class FLAY_1Rnd_ExplosiveArrow: CA_Magazine
 	{
 		scope = 2;
@@ -344,6 +345,7 @@ class CfgMagazines {
 		displayNameShort = "Explosive";
 		descriptionShort = "FLAY_1Rnd_ExplosiveArrow";
 		picture = "\tb_arifle_hkump45\UI\gear_flay_arrow_ca";
+		model = "tb_arifle_hkump45\FLAY_Arrow";
 		ammo = "G_ExplosiveArrow";
 		count = 1;
 		initSpeed = 60;
@@ -358,6 +360,7 @@ class CfgMagazines {
 		displayNameShort = "Flame";
 		descriptionShort = "FLAY_1Rnd_FlameArrow";
 		picture = "\tb_arifle_hkump45\UI\gear_flay_arrow_ca";
+		model = "tb_arifle_hkump45\FLAY_Arrow";
 		ammo = "F_FlameArrow";
 		count = 1;
 		initSpeed = 60;
@@ -372,6 +375,7 @@ class CfgMagazines {
 		displayNameShort = "Flare";
 		descriptionShort = "FLAY_1Rnd_FlareArrow_Red";
 		picture = "\tb_arifle_hkump45\UI\gear_flay_arrow_ca";
+		model = "tb_arifle_hkump45\FLAY_Arrow";
 		ammo = "F_FlareArrow_Red";
 		count = 1;
 		initSpeed = 60;
@@ -386,6 +390,7 @@ class CfgMagazines {
 		displayNameShort = "Smoke";
 		descriptionShort = "FLAY_1Rnd_SmokeArrow";
 		picture = "\tb_arifle_hkump45\UI\gear_flay_arrow_ca";
+		model = "tb_arifle_hkump45\FLAY_Arrow";
 		ammo = "G_SmokeArrow";
 		count = 1;
 		initSpeed = 60;
@@ -458,13 +463,36 @@ class CfgAmmo {
 		timeToLive = 60;
 	};
 	
+	class B_PrecisionArrow: BulletBase
+	{
+		typicalspeed = 110;
+		visibleFire = 0;
+		audibleFire = 0;
+		visibleFireTime = 0;
+		fuseDistance = 0;
+		hit = 5;
+		indirectHit = 0;
+		indirectHitRange = 0;
+		model = "\A3\Weapons_f\Data\bullettracer\tracer_yellow";
+		CraterEffects = "NoCrater";
+		explosionEffects = "NoExplosion";
+		explosive = 0;
+		cost = 1;
+		whistleDist = 0;
+		simulation = "shotShell";
+		deflecting = 0;
+		airFriction = -0.0003;
+		caliber = 0.3;
+		timeToLive = 60;
+	};
+	
 	class B_BroadheadArrow: B_RegularArrow
 	{
-		typicalspeed = 150;
+		typicalspeed = 90;
 		deflecting = 10;
 		hit = 12;
 		caliber = 1;
-		airFriction = -0.0003;
+		airFriction = -0.0012;
 	};	
 	
 	class G_ExplosiveArrow: G_40mm_HE
@@ -564,6 +592,7 @@ class CfgMovesBasic
 		GestureReset[] = {"GestureReset","Gesture"};
 		//GestureReset2[] = {"GestureReset2","Gesture"};
 		//GestureReset3[] = {"GestureReset3","Gesture"};
+		GestureReloadArrowAndFireAi[] = {"GestureReloadArrowAndFireAi","Gesture"};
 		GestureReloadArrow[] = {"GestureReloadArrow","Gesture"};
 		GestureReloadBackQuiver[] = {"GestureReloadBackQuiver","Gesture"};
 		GestureReloadBowQuiver[] = {"GestureReloadBowQuiver","Gesture"};
@@ -630,6 +659,18 @@ class CfgGesturesMale
 			canReload=1;
 		};		
 
+		class GestureReloadArrowAndFireAi: Default
+		{
+			file = "tb_arifle_hkump45\anim\reload3a.rtm"
+			looped = 0;
+			speed = 1;
+			mask = "handsWeapon";
+			rightHandIKCurve[] = {0};
+			canPullTrigger=1;
+			disableWeapons=0;
+			canReload=1;
+		};			
+		
 		class GestureReloadBackQuiver: Default
 		{
 			file = "tb_arifle_hkump45\anim\reload_back.rtm"

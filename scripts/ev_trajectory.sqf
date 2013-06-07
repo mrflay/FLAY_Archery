@@ -47,6 +47,9 @@ if (isNull _projectile) then {
 		case "BLACK":  {_rgba = COLOR_BLACK};
 	};
 	
+	_sequence = player getVariable ["FLAY.trajectory.sequence", 0];
+	_sequence = _sequence + 1;
+	
 	_trajectory = [];
 	_visible = player getVariable ["FLAY.trajectory.visible", false];
 	_starttime = time;
@@ -96,7 +99,7 @@ if (isNull _projectile) then {
 		
 		if (time > _timeout) then {
 		
-			_timeout = time + 0.2;
+			_timeout = time + 0.0;
 			_p = getPosASL _projectile;
 			
 			_dx = (_p select 0) - (_q select 0);
@@ -110,6 +113,7 @@ if (isNull _projectile) then {
 				_dir = [_q, _p] call BIS_fnc_dirTo;
 				if (_visible) then {
 					_r = "FLAY_Segment" createVehicleLocal _q;
+					_r setVariable ["FLAY.trajectory.sequence", _sequence];
 					_r setObjectTexture [0, _rgba];
 					_r setPosASL _q;
 					_r setVectorUp [0,0,1];
@@ -118,6 +122,19 @@ if (isNull _projectile) then {
 					_r setDir _dir;
 				};
 				_trajectory = _trajectory + [[_q,_theta,_dir,_rgba,_len]];
+				_cam = player getVariable "FLAY.archery.pip.cam";
+				if (not (isNull _cam)) then {
+					
+					_target = [_q, _vdir] call BIS_fnc_vectorAdd;
+					//_cam camSetTarget _target;
+					//_cam camSetDive _theta;
+					//_cam camSetPos (getposatl _projectile);
+					
+					//_cam camCommit 0;
+					_vdir = (velocity _projectile) call BIS_fnc_unitVector;
+					_cam setVectorDir _vdir;
+					_cam setPosASL _q;
+				};
 			};
 			
 			_q = _p;
@@ -138,9 +155,6 @@ if (isNull _projectile) then {
 		_dir = [_q, _p] call BIS_fnc_dirTo;
 		_trajectory = _trajectory + [[_q,_theta,_dir,_rgba,_len]];
 	};
-
-	_id = player getVariable ["FLAY.trajectory.sequence", 0];
-	_id = _id + 1;
 	
 	_startMarker = "FLAY_ArrowPlaceholder" createVehicleLocal _p;
 	_startMarker setPosASL (getPosASL _unit);
@@ -159,8 +173,8 @@ if (isNull _projectile) then {
 	_startMarker setVariable ["FLAY.trajectory.visible", _visible];
 	_startMarker setVariable ["FLAY.trajectory.starttime", _starttime];
 	_startMarker setVariable ["FLAY.trajectory.endtime", _endtime];
-	_startMarker setVariable ["FLAY.trajectory.id", _id];
-	player setVariable ["FLAY.trajectory.sequence", _id];
+	_startMarker setVariable ["FLAY.trajectory.sequence", _sequence];
+	player setVariable ["FLAY.trajectory.sequence", _sequence];
 	
 };
 

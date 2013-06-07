@@ -2,7 +2,13 @@
 
 _lastid = player getVariable ["FLAY.trajectory.sequence", 0];
  
-{ deleteVehicle _x; } forEach (player nearObjects ["FLAY_Segment", 100000]);
+{
+	// keep last 3 trajectories
+	_id = _x getVariable ["FLAY.trajectory.sequence", -1];
+	if (_id < _lastid - 2) then {
+		deleteVehicle _x; 
+	};
+} forEach (player nearObjects ["FLAY_Segment", 1000]);
 
 { 
 	_marker = _x getVariable "FLAY.trajectory.begin";
@@ -13,4 +19,4 @@ _lastid = player getVariable ["FLAY.trajectory.sequence", 0];
 		deleteVehicle _marker;
 		deleteVehicle _marker2;
 	};
-} forEach (player nearObjects ["FLAY_ArrowPlaceholder", 100000]);
+} forEach (player nearObjects ["FLAY_ArrowPlaceholder", 1000]);

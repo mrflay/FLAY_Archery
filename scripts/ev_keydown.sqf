@@ -9,7 +9,7 @@ _handled=false;
 if (dialog) exitWith { false };
 
 _weapon = currentWeapon player;
-if (not (_weapon in ["FLAY_CompoundBow", "FLAY_RecurveBow"])) exitWith { hint "ev_keydown.sqf: not a bow"; false; };
+if (not (_weapon in ["FLAY_CompoundBow", "FLAY_RecurveBow"])) exitWith { false; };
 
 if (_key in _dik_r) then {
 	// fixme: handle race conditions better

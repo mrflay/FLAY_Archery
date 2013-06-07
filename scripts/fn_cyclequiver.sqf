@@ -2,7 +2,12 @@
 _reloadMuzzleIndex = 0;
 _reloadMuzzles = ["DummyReloadBackQuiverMuzzle","DummyReloadBowQuiverMuzzle"];
 _reloadMagazines = ["FLAY_1Rnd_DummyArrow1","FLAY_1Rnd_DummyArrow3"];
-_quiver = (primaryWeaponItems player) select 1;
+
+_items = primaryWeaponItems player;
+_quiver = "";
+if (count _items > 0) then {
+	_quiver = _items select 1;
+};
 if (_quiver != "") then {
 	_reloadMuzzleIndex = player getVariable ["FLAY.archery.state.ReloadMuzzleIndex", 0];
 };
@@ -18,9 +23,10 @@ _reloadMagazine = (_reloadMagazines select _reloadMuzzleIndex);
 //player setVehicleAmmo 0;
 //player addWeapon _weapon;
 //{ player addPrimaryWeaponItem _x; } forEach _items;
-if (not (_reloadMagazine in magazines player)) then {
+player setVehicleAmmo 0;
+//if (not (_reloadMagazine in magazines player)) then {
 	player addmagazine _reloadMagazine;
-};
+//};
 player selectWeapon _reloadMuzzle;
 player setVariable ["FLAY.archery.state.ReloadMuzzle", _reloadMuzzle];
 player setVariable ["FLAY.archery.state.ReloadMagazine", _reloadMagazine];
