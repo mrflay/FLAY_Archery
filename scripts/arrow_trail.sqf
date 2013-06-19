@@ -6,7 +6,7 @@ _ammo = _this select 4;
 _magazine = _this select 5;
 _projectile = _this select 6;
 
-if (_weapon in ["FLAY_CompoundBow","FLAY_RecurveBow"]) then {
+if (_weapon in ["FLAY_CompoundBowDrawn"]) then {
 	_p = aimPos _unit;
 	_q = getpos _projectile;
 	_d = _unit weaponDirection _weapon;

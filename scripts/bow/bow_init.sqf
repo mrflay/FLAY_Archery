@@ -6,7 +6,8 @@ FLAY_EH_KeyUp = compile preprocessFile "\FLAY\FLAY_Archery\scripts\bow\ev_KeyUp.
 
 //FLAY_fnc_ReloadBow = compile preprocessFile "\FLAY\FLAY_Archery\scripts\fn_reload.sqf";
 //FLAY_fnc_UnloadBow = compile preprocessFile "\FLAY\FLAY_Archery\scripts\fn_unload.sqf";
-//FLAY_fnc_ResetWeaponAnimHack = compile preprocessFile "\FLAY\FLAY_Archery\scripts\fn_resetanimhack.sqf";
+FLAY_fnc_SetBowState = compile preprocessFile "\FLAY\FLAY_Archery\scripts\bow\fn_setbowstate.sqf";
+FLAY_fnc_CanReloadBow = compile preprocessFile "\FLAY\FLAY_Archery\scripts\bow\fn_canreloadbow.sqf";
 //FLAY_fnc_CycleQuiver = compile preprocessFile "\FLAY\FLAY_Archery\scripts\fn_cyclequiver.sqf";
 
 (findDisplay 46) displayAddEventHandler ["MouseButtonDown", "_this call FLAY_EH_MouseButtonDown;"];

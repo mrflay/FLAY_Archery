@@ -10,69 +10,44 @@ _handled=false;
 if (dialog) exitWith { false };
 
 _weapon = currentWeapon player;
-_muzzle = currentMuzzle player;
-_magazines = magazines player;
-_magazine = currentMagazine player;
-if (not (_weapon in ["FLAY_CompoundBow", "FLAY_CompoundBowEmpty",  "FLAY_CompoundBowLoaded", "FLAY_CompoundBowDrawn", "FLAY_RecurveBow"])) exitWith { false; };
+_isBow = isClass (configFile >> "CfgWeapons" >> _weapon >> "FLAY_BowInfo");
+if (not _isBow) exitWith { false; };
 
-
-if (_weapon in ["FLAY_CompoundBowEmpty"]) then {
+_bowState = getText (configFile >> "CfgWeapons" >> _weapon >> "FLAY_BowInfo" >> "state");
+if (_bowState == "empty") then {
 	if (_key in _reloadKeys) then {
 
-		_compatibleMagazines = getArray (configFile >> "CfgWeapons" >> _weapon >> _muzzle >> "magazines");
-		_canReload = false;
-		{ if (_x in _compatibleMagazines) then { _canReload = true; }; } forEach _magazines;
+		_canReload = [] call FLAY_fnc_CanReloadBow;
 		if (not _canReload) exitWith { true; };
 
-		_handled=true; // allow reload
-		[_magazines] spawn {
+		_handled=true;
+		[] spawn {
 			player playActionNow "GestureReloadBackQuiver";
 			sleep 0.5;
-			
-			_weapon = currentWeapon player;
-			_muzzle = currentMuzzle player;
-			_magazines = _this select 0;
-			player removeWeapon _weapon;
-			{ player removeMagazines _x; } forEach _magazines;
-			player addWeapon "FLAY_CompoundBowLoaded";
-			player selectWeapon _muzzle;
-			{ player addMagazine _x; } forEach _magazines;
+			["next"] call FLAY_fnc_SetBowState;
 		};
 	};
 };
 
-if (_weapon in ["FLAY_CompoundBowLoaded"]) then {
+if (_bowState == "loaded") then {
 	if (not _shift and _key in _reloadKeys) then {
 		_handled = true;
 		player PlayActionNow "GestureReset"; 
 		player PlayActionNow "GestureReloadArrow";
-		player removeWeapon _weapon;
-		{ player removeMagazines _x; } forEach _magazines;
-		{ player addMagazine _x; } forEach _magazines;
-		player addWeapon "FLAY_CompoundBowDrawn";
-		player selectWeapon _muzzle;
+		["next"] call FLAY_fnc_SetBowState;
 	};
 	if (_shift and _key in _reloadKeys) then {
 		_handled = true;
 		player playActionNow "GestureReloadBackQuiver";
-		player removeWeapon _weapon;
-		{ player removeMagazines _x; } forEach _magazines;
-		player addWeapon "FLAY_CompoundBowEmpty";
-		player selectWeapon _muzzle;
-		{ player addMagazine _x; } forEach _magazines;
+		["prev"] call FLAY_fnc_SetBowState;
 	};	
 };
 
-if (_weapon in ["FLAY_CompoundBowDrawn"]) then {
+if (_bowState == "drawn") then {
 	if (_key in _reloadKeys) then {
 		_handled = true;
 		player playActionNow "GestureReset";
-		player removeWeapon _weapon;
-		{ player removeMagazines _x; } forEach _magazines;
-		player addWeapon "FLAY_CompoundBowLoaded";
-		player selectWeapon _muzzle;
-		{ player addMagazine _x; } forEach _magazines;
-		player addMagazine _magazine;
+		["prev"] call FLAY_fnc_SetBowState;
 	};
 };
 

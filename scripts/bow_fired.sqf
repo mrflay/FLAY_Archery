@@ -7,7 +7,7 @@ _magazine = _this select 5;
 _projectile = _this select 6;
 _handled = false;
 
-if (_weapon in ["FLAY_CompoundBow","FLAY_RecurveBow"]) then {
+if (_weapon in ["FLAY_CompoundBowDrawn"]) then {
 	 _this execVM "\FLAY\FLAY_Archery\scripts\arrow_trail.sqf";
 	_handled=true;
 };

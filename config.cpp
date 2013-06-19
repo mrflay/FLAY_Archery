@@ -80,7 +80,6 @@ class CfgWeapons {
 	
 	class FLAY_Archery_Bow: Rifle
 	{	
-			
 		scope = 1;
 		displayName = "Bow";
 		descriptionshort = "Bow<br />Draw Length: 28""<br />Draw Weight: 50 lbs<br />String: 58.5""";
@@ -93,6 +92,12 @@ class CfgWeapons {
 		//reloadAction = "GestureReloadArrow";
 		//reloadmagazinesound[] = {"A3\sounds_f\weapons\reloads\new_trg.wav", 0.1, 1, 30};
 		//reloadsound[] = {"", 1, 1};
+		magazines[] = {};
+		
+		class FLAY_BowInfo {
+			scope = 2;
+			state = "empty";
+		};
 		
 		muzzles[] = {
 			"ArrowMuzzle"
@@ -109,7 +114,7 @@ class CfgWeapons {
 			cursor = "EmptyCursor";
 			cursoraim = "arifle";
 			magazines[] = {
-				"FLAY_1Rnd_RegularArrow",
+				"FLAY_1Rnd_RegularArrow"
 				,"FLAY_1Rnd_PrecisionArrow"
 				,"FLAY_1Rnd_BroadheadArrow"
 				,"FLAY_1Rnd_ExplosiveArrow"
@@ -264,19 +269,29 @@ class CfgWeapons {
 	
 	class FLAY_CompoundBowEmpty: FLAY_Archery_Bow {
 		scope = 2;
-		displayName = "Compound Bow 2";
+		displayName = "Compound Bow (empty)";
 		descriptionshort = "Compound Bow<br />Draw Length: 28""<br />Draw Weight: 65 lbs<br />String: 58.5""";		
 		picture = "\FLAY\FLAY_Archery\UI\gear_flay_nighthawk_x_ca";
 		model = "\FLAY\FLAY_Archery\FLAY_CompoundBow";
 		handanim[] = {"OFP2_ManSkeleton","FLAY\FLAY_Archery\anim\handanim_compoundbow.rtm"};
-		muzzles[] = {"ArrowMuzzle"};
+		muzzles[] = {"ArrowMuzzle","QuiverMuzzle"};
+		class FLAY_BowInfo: FLAY_BowInfo {
+			scope = 2;
+			state = "empty";
+			prev = "FLAY_CompoundBowEmpty";
+			next = "FLAY_CompoundBowLoaded";
+			load = 0;
+			empty = "FLAY_CompoundBowEmpty";
+			loaded = "FLAY_CompoundBowLoaded";
+			drawn = "FLAY_CompoundBowDrawn";			
+		};
 		class ArrowMuzzle: ArrowMuzzle
 		{
 			displayName = "Compound Bow";
 			cursor = "EmptyCursor";
 			cursoraim = "arifle";
 			magazines[] = {
-				"FLAY_1Rnd_RegularArrow",
+				"FLAY_1Rnd_RegularArrow"
 				,"FLAY_1Rnd_PrecisionArrow"
 				,"FLAY_1Rnd_BroadheadArrow"
 				,"FLAY_1Rnd_ExplosiveArrow"
@@ -285,8 +300,25 @@ class CfgWeapons {
 			showEmpty = 1;
 			autoReload = 0; 
 			reloadTime = 1; 
-			magazineReloadTime = 1;			
+			magazineReloadTime = 1;
 		};
+		class QuiverMuzzle: ArrowMuzzle
+		{
+			displayName = "Compound Bow";
+			cursor = "EmptyCursor";
+			cursoraim = "arifle";
+			magazines[] = {
+				"FLAY_7Rnd_RegularArrow"
+				,"FLAY_7Rnd_PrecisionArrow"
+				,"FLAY_7Rnd_BroadheadArrow"
+				,"FLAY_7Rnd_ExplosiveArrow"
+			};
+			reloadAction = "GestureReloadBowQuiver";
+			showEmpty = 1;
+			autoReload = 0; 
+			reloadTime = 1; 
+			magazineReloadTime = 1;
+		};		
 		class Library {
 			libtextdesc = "Compound Bow";
 		};
@@ -294,6 +326,13 @@ class CfgWeapons {
 	
 	class FLAY_CompoundBowLoaded: FLAY_CompoundBowEmpty {
 		scope = 2;
+		class FLAY_BowInfo: FLAY_BowInfo {
+			scope = 2;
+			state = "loaded";
+			prev = "FLAY_CompoundBowEmpty";
+			next = "FLAY_CompoundBowDrawn";
+			load = 0;
+		};
 		displayName = "Compound Bow 2 (loaded)";
 		model = "\FLAY\FLAY_Archery\FLAY_CompoundBowLoaded";
 		handanim[] = {"OFP2_ManSkeleton","FLAY\FLAY_Archery\anim\handanim_compoundbow.rtm"};
@@ -309,13 +348,20 @@ class CfgWeapons {
 	
 	class FLAY_CompoundBowDrawn: FLAY_CompoundBowEmpty {
 		scope = 2;
+		class FLAY_BowInfo: FLAY_BowInfo {
+			scope = 2;
+			state = "drawn";
+			prev = "FLAY_CompoundBowLoaded";
+			next = "FLAY_CompoundBowDrawn";
+			load = 1;
+		};
 		displayName = "Compound Bow 2 (drawn)";
 		model = "\FLAY\FLAY_Archery\FLAY_CompoundBowDrawn";
 		handanim[] = {"OFP2_ManSkeleton","FLAY\FLAY_Archery\anim\handanim_compoundbow.rtm"};
 		class ArrowMuzzle: ArrowMuzzle
 		{
 			reloadAction = "";
-			autoReload=0; 
+			autoReload = 0; 
 			reloadTime = 0; 
 			magazineReloadTime = 0;
 		};
@@ -352,7 +398,20 @@ class CfgMagazines {
 		lastroundstracer = 0;
 		scope = 2;
 		tracersevery = 0;
-	};	
+	};
+	class FLAY_7Rnd_RegularArrow : CA_Magazine {
+		displayname = "Arrow";
+		displayNameShort = "Arrow";
+		descriptionshort = "FLAY_7Rnd_RegularArrow";
+		picture = "\FLAY\FLAY_Archery\UI\gear_flay_arrow_ca";
+		model = "FLAY\FLAY_Archery\FLAY_Arrow";
+		ammo = "B_RegularArrow";
+		count = 7;
+		initspeed = 100;
+		lastroundstracer = 0;
+		scope = 2;
+		tracersevery = 0;
+	};		
 	class FLAY_1Rnd_PrecisionArrow: CA_Magazine
 	{
 		scope = 2;
@@ -369,6 +428,22 @@ class CfgMagazines {
 		nameSound = "";
 		maxLeadSpeed = 50;
 	};
+	class FLAY_7Rnd_PrecisionArrow: CA_Magazine
+	{
+		scope = 2;
+		value = 1;
+		displayName = "Precision Arrow";
+		displayNameShort = "Precision";
+		descriptionShort = "FLAY_7Rnd_PrecisionArrow";
+		picture = "\FLAY\FLAY_Archery\UI\gear_flay_arrow_ca";
+		model = "FLAY\FLAY_Archery\FLAY_Arrow";
+		type = 256;
+		ammo = "B_PrecisionArrow";
+		count = 7;
+		initSpeed = 120;
+		nameSound = "";
+		maxLeadSpeed = 50;
+	};	
 	class FLAY_1Rnd_BroadheadArrow: CA_Magazine
 	{
 		scope = 2;
@@ -381,6 +456,22 @@ class CfgMagazines {
 		type = 256;
 		ammo = "B_BroadheadArrow";
 		count = 1;
+		initSpeed = 90;
+		nameSound = "";
+		maxLeadSpeed = 50;
+	};	
+	class FLAY_7Rnd_BroadheadArrow: CA_Magazine
+	{
+		scope = 2;
+		value = 1;
+		displayName = "Broadhead Arrow";
+		displayNameShort = "Broadhead";
+		descriptionShort = "FLAY_7Rnd_BroadheadArrow";
+		picture = "\FLAY\FLAY_Archery\UI\gear_flay_arrow_ca";
+		model = "FLAY\FLAY_Archery\FLAY_Arrow";
+		type = 256;
+		ammo = "B_BroadheadArrow";
+		count = 7;
 		initSpeed = 90;
 		nameSound = "";
 		maxLeadSpeed = 50;
@@ -400,6 +491,21 @@ class CfgMagazines {
 		initSpeed = 60;
 		nameSound = "";
 	};
+	class FLAY_7Rnd_ExplosiveArrow: CA_Magazine
+	{
+		scope = 2;
+		value = 1;
+		type = 16;
+		displayName = "Explosive Arrow";
+		displayNameShort = "Explosive";
+		descriptionShort = "FLAY_7Rnd_ExplosiveArrow";
+		picture = "\FLAY\FLAY_Archery\UI\gear_flay_arrow_ca";
+		model = "FLAY\FLAY_Archery\FLAY_Arrow";
+		ammo = "G_ExplosiveArrow";
+		count = 7;
+		initSpeed = 60;
+		nameSound = "";
+	};	
 	class FLAY_1Rnd_FlameArrow: CA_Magazine
 	{
 		scope = 2;
