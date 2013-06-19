@@ -55,7 +55,7 @@ if (_button < 0) then {
 		_weapon = primaryWeapon player;
 		_muzzleItem = (player weaponAccessories _weapon) select 0;
 		if (_muzzleItem != "") then {
-			player removeItemFromPrimaryWeapon _muzzleItem;
+			player removePrimaryWeaponItem _muzzleItem;
 		};
 	};
 	if (_isEmpty) then {
@@ -69,7 +69,8 @@ if (_button < 0) then {
 		[_muzzle, _magazine] spawn {
 			_timeout = time + 0.2;
 			while {time < _timeout} do {
-				sleep 0.05;
+			
+				sleep 0.01;
 				[] call FLAY_fnc_ResetWeaponAnimHack;
 				player addmagazine (_this select 1);
 				player addmagazine "FLAY_1Rnd_DummyArrow2";

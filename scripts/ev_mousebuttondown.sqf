@@ -8,7 +8,7 @@ if (not (_weapon in ["FLAY_CompoundBow", "FLAY_RecurveBow"])) exitWith { false; 
 
 // only run if inventory dialog is shown
 if (dialog) then {
-	// track which magazine and muzzle attachment is active so we know wether to
+	// track which magazine and muzzle attachment is active so we know whether to
 	// switch the muzzleItem or magazine when button is released.
 	_magazine = currentMagazine player;
 	_muzzleItem = (player weaponAccessories _weapon) select 0;
@@ -61,6 +61,7 @@ if (_button == 0) then {
 	
 	// terminate the reload animation to enable the weapon to be fired.
 	player playActionNow "GestureReset";
+	//player playActionNow "GestureReloadArrow2";
 	player selectWeapon "ArrowMuzzle";
 	
 	
@@ -71,12 +72,8 @@ if (_button == 0) then {
 	// i.e. remove and re-add the weapon to player (keeping all attachments, except the muzzle/arrowpoint).
 	_items = primaryWeaponItems player;
 	_items = [_items select 1, _items select 2]; // don't re-add the points, i.e treat arrow points as consumables
-	player removeWeapon _weapon;
-	player addWeapon _weapon;
-	{ if (_x != "") then { player addPrimaryWeaponItem _x; }; } forEach _items;
-
-	// switch to the dummy reload muzzle 
-	player setVehicleAmmo 0;
+	[_items] call FLAY_fnc_ResetWeaponAnimHack;
+	
 	_reloadMuzzle = player getVariable ["FLAY.archery.state.ReloadMuzzle", "DummyReloadBackQuiverMuzzle"];
 	_reloadMagazine = player getVariable ["FLAY.archery.state.ReloadMagazine", "FLAY_1Rnd_DummyArrow1"];
 	player addmagazine _reloadMagazine;

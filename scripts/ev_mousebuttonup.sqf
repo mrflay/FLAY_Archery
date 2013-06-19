@@ -45,10 +45,10 @@ if (_magazineAfter != _magazineBefore) then {
 		player addPrimaryWeaponItem "FLAY_point_Precision";
 	};
 	if (_magazineAfter == "FLAY_1Rnd_RegularArrow") then {
-		player removeItemFromPrimaryWeapon _muzzleItemAfter;
+		player removePrimaryWeaponItem _muzzleItemAfter;
 	};
 	if (_magazineAfter == "") then {
-		player removeItemFromPrimaryWeapon _muzzleItemAfter;
+		player removePrimaryWeaponItem _muzzleItemAfter;
 	};
 	if (_muzzleItemBefore != "") then {
 		player addItem _muzzleItemBefore;

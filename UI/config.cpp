@@ -26,7 +26,7 @@ class FLAY_FitaHitMark: RscPicture
 	y = 0;
 	w = 0.02;
 	h = 0.02 * 4 / 3;
-	//text = "\tb_arifle_hkump45\ui\FITA_marker_ca.paa";
+	//text = "\FLAY\FLAY_Archery\ui\FITA_marker_ca.paa";
 };
 
 class RscTitles
@@ -59,7 +59,7 @@ class RscTitles
 				w = "(call compile (profilenamespace getvariable ['IGUI_GRID_FITA_W',str (0.25)]))";
 				h = "(call compile (profilenamespace getvariable ['IGUI_GRID_FITA_H',str (0.25 * 4 / 3)]))";
 
-				text = "\tb_arifle_hkump45\ui\FITA_122_ca.paa";
+				text = "\FLAY\FLAY_Archery\ui\FITA_122_ca.paa";
 				color[] = {1, 1, 1, 0.5};
 				colorActive[] = {1, 1, 1, 0};
 				colorBackground[] = {1,1,1,0.5};

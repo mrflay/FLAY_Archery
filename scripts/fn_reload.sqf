@@ -3,6 +3,7 @@ if (_currentMuzzle in ["DummyReloadBackQuiverMuzzle","DummyReloadBowQuiverMuzzle
 	_isReloading = player getVariable ["FLAY.archery.state.reloading", false];
 	if (_isReloading) exitWith {};
 	player setVariable ["FLAY.archery.state.reloading", true];
+	
 	[] spawn {
 		_reloadFromMuzzlePossible = true;
 		_ammoCount = 1;
