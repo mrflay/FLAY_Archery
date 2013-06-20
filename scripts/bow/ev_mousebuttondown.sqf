@@ -16,12 +16,7 @@ if (_bowState == "loaded") then {
 	if (_button == 0) then {
 		player setVariable ["flay.archery.state.fireOnRelease", true];
 		_handled = true;
-		[] spawn {
-			sleep 0.05;
-			player PlayActionNow "GestureReset"; 
-			player PlayActionNow "GestureReloadArrow";
-			["next"] call FLAY_fnc_SetBowState;
-		};
+		["next"] call FLAY_fnc_SetBowState;
 	};
 };
 

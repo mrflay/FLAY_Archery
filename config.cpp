@@ -297,6 +297,7 @@ class CfgWeapons {
 				,"FLAY_1Rnd_ExplosiveArrow"
 			};
 			reloadAction = "GestureReloadBackQuiver";
+			unloadAction = "GestureReset";
 			showEmpty = 1;
 			autoReload = 0; 
 			reloadTime = 1; 
@@ -314,6 +315,7 @@ class CfgWeapons {
 				,"FLAY_7Rnd_ExplosiveArrow"
 			};
 			reloadAction = "GestureReloadBowQuiver";
+			unloadAction = "GestureReset";
 			showEmpty = 1;
 			autoReload = 0; 
 			reloadTime = 1; 
@@ -339,6 +341,7 @@ class CfgWeapons {
 		class ArrowMuzzle: ArrowMuzzle
 		{
 			reloadAction = "GestureReloadArrow";
+			unloadAction = "GestureReloadBackQuiver";
 			autoReload = 0; 
 		};
 		class Library {
@@ -360,7 +363,8 @@ class CfgWeapons {
 		handanim[] = {"OFP2_ManSkeleton","FLAY\FLAY_Archery\anim\handanim_compoundbow.rtm"};
 		class ArrowMuzzle: ArrowMuzzle
 		{
-			reloadAction = "";
+			reloadAction = "GestureReset"; // todo: fire animation
+			unloadAction = "GestureReset";
 			autoReload = 0; 
 			reloadTime = 0; 
 			magazineReloadTime = 0;
