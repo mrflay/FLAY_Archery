@@ -344,6 +344,12 @@ class CfgWeapons {
 			unloadAction = "GestureReloadBackQuiver";
 			autoReload = 0; 
 		};
+		class QuiverMuzzle: QuiverMuzzle
+		{
+			reloadAction = "GestureReloadArrow";
+			unloadAction = "GestureReloadBowQuiver";
+			autoReload = 0; 
+		};		
 		class Library {
 			libtextdesc = "Compound Bow";
 		};
@@ -369,6 +375,14 @@ class CfgWeapons {
 			reloadTime = 0; 
 			magazineReloadTime = 0;
 		};
+		class QuiverMuzzle: QuiverMuzzle
+		{
+			reloadAction = "GestureReset";  // todo: fire animation
+			unloadAction = "GestureReset";
+			autoReload = 0; 
+			reloadTime = 0; 
+			magazineReloadTime = 0;
+		};			
 		class Library {
 			libtextdesc = "Compound Bow";
 		};
