@@ -6,7 +6,7 @@ class CfgPatches
 	requiredversion = 0.1;
 	units[] = {"FLAY_Target_FITA_122","FLAY_Target_Fold"};
 	weapons[] = {"FLAY_CompoundBow","FLAY_RecurveBow","FLAY_Arrow"};
-	magazines[] = {"FLAY_1Rnd_RegularArrow","FLAY_1Rnd_BroadheadArrow","FLAY_1Rnd_ExplosiveArrow","FLAY_1Rnd_SmokeArrow","FLAY_1Rnd_FlareArrow"};
+	magazines[] = {"FLAY_1Rnd_Arrow","FLAY_1Rnd_BroadheadArrow","FLAY_1Rnd_ExplosiveArrow","FLAY_1Rnd_SmokeArrow","FLAY_1Rnd_FlareArrow"};
  };
 };
 
@@ -99,14 +99,7 @@ class CfgWeapons {
 			state = "empty";
 		};
 		
-		muzzles[] = {
-			"ArrowMuzzle"
-			// hacks
-			,"DummyReloadBackQuiverMuzzle"
-			,"DummyReloadBowQuiverMuzzle"
-			,"DummyReloadBeltQuiverMuzzle"
-			,"DummyReloadArrowMuzzle"
-		};
+		muzzles[] = {"ArrowMuzzle"};
 				
 		class ArrowMuzzle: GrenadeLauncher
 		{
@@ -114,13 +107,13 @@ class CfgWeapons {
 			cursor = "EmptyCursor";
 			cursoraim = "arifle";
 			magazines[] = {
-				"FLAY_1Rnd_RegularArrow"
+				"FLAY_1Rnd_Arrow"
 				,"FLAY_1Rnd_PrecisionArrow"
 				,"FLAY_1Rnd_BroadheadArrow"
 				,"FLAY_1Rnd_ExplosiveArrow"
 			};
 
-			reloadAction = "GestureReloadArrowAndFireAi"; // only used by ai, because player reloads from other muzzles.
+			reloadAction = "GestureReloadArrowAndFireAi"; // only used by ai, because player reloads using scripts
 			discreteDistance[] = {30};
 			discreteDistanceInitIndex = 0;			
 			sound[] = {"",0.00031622776,1};
@@ -155,44 +148,6 @@ class CfgWeapons {
 			cost = 0;
 		};
 		
-		class DummyReloadBackQuiverMuzzle: ArrowMuzzle
-		{
-			magazineReloadTime=1;
-			autoReload = 0;
-			backgroundReload = 0;
-			showEmpty = 1;
-			magazines[] = {"FLAY_1Rnd_DummyArrow1"};
-			reloadaction = "GestureReloadBackQuiver";
-		};
-		class DummyReloadBowQuiverMuzzle: ArrowMuzzle
-		{
-			magazineReloadTime=1;
-			autoReload = 0;
-			backgroundReload = 0;
-			showEmpty = 1;
-			magazines[] = {"FLAY_1Rnd_DummyArrow3"};
-			reloadaction = "GestureReloadBowQuiver";
-		};
-		class DummyReloadBeltQuiverMuzzle: ArrowMuzzle
-		{
-			magazineReloadTime=1;
-			autoReload = 0;
-			backgroundReload = 0;
-			showEmpty = 1;
-			magazines[] = {"FLAY_1Rnd_DummyArrow4"};
-			reloadaction = "GestureReloadBeltQuiver";
-		};			
-		class DummyReloadArrowMuzzle: ArrowMuzzle
-		{
-			magazineReloadTime=10;
-			autoReload = 0;
-			reloadTime = 0;
-			backgroundReload = 1; // HACK: enables this reload animation to be shown for muzzles with autoReload=1
-			showEmpty = 1;
-			magazines[] = {"FLAY_1Rnd_DummyArrow2"};
-			reloadAction = "GestureReloadArrow";
-		};
-				
 		class Library {
 			libtextdesc = "";
 		};
@@ -262,28 +217,17 @@ class CfgWeapons {
 		picture = "\FLAY\FLAY_Archery\UI\gear_flay_nighthawk_x_ca";
 		model = "\FLAY\FLAY_Archery\FLAY_CompoundBow";
 		handanim[] = {"OFP2_ManSkeleton","FLAY\FLAY_Archery\anim\handanim_compoundbow.rtm"};
-		class Library {
-			libtextdesc = "Compound Bow";
-		};
-	};
-	
-	class FLAY_CompoundBowEmpty: FLAY_Archery_Bow {
-		scope = 2;
-		displayName = "Compound Bow (empty)";
-		descriptionshort = "Compound Bow<br />Draw Length: 28""<br />Draw Weight: 65 lbs<br />String: 58.5""";		
-		picture = "\FLAY\FLAY_Archery\UI\gear_flay_nighthawk_x_ca";
-		model = "\FLAY\FLAY_Archery\FLAY_CompoundBow";
-		handanim[] = {"OFP2_ManSkeleton","FLAY\FLAY_Archery\anim\handanim_compoundbow.rtm"};
 		muzzles[] = {"ArrowMuzzle","QuiverMuzzle"};
 		class FLAY_BowInfo: FLAY_BowInfo {
 			scope = 2;
+			load = 0; // auto load magazine, 1=yes, 0=no
 			state = "empty";
-			prev = "FLAY_CompoundBowEmpty";
+			prev = "FLAY_CompoundBow";
 			next = "FLAY_CompoundBowLoaded";
-			load = 0;
-			empty = "FLAY_CompoundBowEmpty";
+			empty = "FLAY_CompoundBow";
 			loaded = "FLAY_CompoundBowLoaded";
 			drawn = "FLAY_CompoundBowDrawn";			
+
 		};
 		class ArrowMuzzle: ArrowMuzzle
 		{
@@ -291,7 +235,7 @@ class CfgWeapons {
 			cursor = "EmptyCursor";
 			cursoraim = "arifle";
 			magazines[] = {
-				"FLAY_1Rnd_RegularArrow"
+				 "FLAY_1Rnd_Arrow"
 				,"FLAY_1Rnd_PrecisionArrow"
 				,"FLAY_1Rnd_BroadheadArrow"
 				,"FLAY_1Rnd_ExplosiveArrow"
@@ -300,7 +244,7 @@ class CfgWeapons {
 			unloadAction = "GestureReset";
 			showEmpty = 1;
 			autoReload = 0; 
-			reloadTime = 1; 
+			reloadTime = 0; 
 			magazineReloadTime = 1;
 		};
 		class QuiverMuzzle: ArrowMuzzle
@@ -309,7 +253,7 @@ class CfgWeapons {
 			cursor = "EmptyCursor";
 			cursoraim = "arifle";
 			magazines[] = {
-				"FLAY_7Rnd_RegularArrow"
+				 "FLAY_7Rnd_Arrow"
 				,"FLAY_7Rnd_PrecisionArrow"
 				,"FLAY_7Rnd_BroadheadArrow"
 				,"FLAY_7Rnd_ExplosiveArrow"
@@ -318,7 +262,7 @@ class CfgWeapons {
 			unloadAction = "GestureReset";
 			showEmpty = 1;
 			autoReload = 0; 
-			reloadTime = 1; 
+			reloadTime = 0; 
 			magazineReloadTime = 1;
 		};		
 		class Library {
@@ -326,12 +270,12 @@ class CfgWeapons {
 		};
 	};
 	
-	class FLAY_CompoundBowLoaded: FLAY_CompoundBowEmpty {
+	class FLAY_CompoundBowLoaded: FLAY_CompoundBow {
 		scope = 2;
 		class FLAY_BowInfo: FLAY_BowInfo {
 			scope = 2;
 			state = "loaded";
-			prev = "FLAY_CompoundBowEmpty";
+			prev = "FLAY_CompoundBow";
 			next = "FLAY_CompoundBowDrawn";
 			load = 0;
 		};
@@ -355,7 +299,7 @@ class CfgWeapons {
 		};
 	};
 	
-	class FLAY_CompoundBowDrawn: FLAY_CompoundBowEmpty {
+	class FLAY_CompoundBowDrawn: FLAY_CompoundBow {
 		scope = 2;
 		class FLAY_BowInfo: FLAY_BowInfo {
 			scope = 2;
@@ -404,10 +348,10 @@ class CfgWeapons {
 class CfgMagazines {
 
 	class CA_Magazine;
-	class FLAY_1Rnd_RegularArrow : CA_Magazine {
+	class FLAY_1Rnd_Arrow : CA_Magazine {
 		displayname = "Arrow";
 		displayNameShort = "Arrow";
-		descriptionshort = "FLAY_1Rnd_RegularArrow";
+		descriptionshort = "FLAY_1Rnd_Arrow";
 		picture = "\FLAY\FLAY_Archery\UI\gear_flay_arrow_ca";
 		model = "FLAY\FLAY_Archery\FLAY_Arrow";
 		ammo = "B_RegularArrow";
@@ -417,14 +361,14 @@ class CfgMagazines {
 		scope = 2;
 		tracersevery = 0;
 	};
-	class FLAY_7Rnd_RegularArrow : CA_Magazine {
+	class FLAY_7Rnd_Arrow : CA_Magazine {
 		displayname = "Arrow";
 		displayNameShort = "Arrow";
-		descriptionshort = "FLAY_7Rnd_RegularArrow";
+		descriptionshort = "FLAY_7Rnd_Arrow";
 		picture = "\FLAY\FLAY_Archery\UI\gear_flay_arrow_ca";
 		model = "FLAY\FLAY_Archery\FLAY_Arrow";
 		ammo = "B_RegularArrow";
-		count = 7;
+		count = 1;
 		initspeed = 100;
 		lastroundstracer = 0;
 		scope = 2;
@@ -457,7 +401,7 @@ class CfgMagazines {
 		model = "FLAY\FLAY_Archery\FLAY_Arrow";
 		type = 256;
 		ammo = "B_PrecisionArrow";
-		count = 7;
+		count = 1;
 		initSpeed = 120;
 		nameSound = "";
 		maxLeadSpeed = 50;
@@ -489,7 +433,7 @@ class CfgMagazines {
 		model = "FLAY\FLAY_Archery\FLAY_Arrow";
 		type = 256;
 		ammo = "B_BroadheadArrow";
-		count = 7;
+		count = 1;
 		initSpeed = 90;
 		nameSound = "";
 		maxLeadSpeed = 50;
@@ -520,7 +464,7 @@ class CfgMagazines {
 		picture = "\FLAY\FLAY_Archery\UI\gear_flay_arrow_ca";
 		model = "FLAY\FLAY_Archery\FLAY_Arrow";
 		ammo = "G_ExplosiveArrow";
-		count = 7;
+		count = 1;
 		initSpeed = 60;
 		nameSound = "";
 	};	
@@ -569,39 +513,6 @@ class CfgMagazines {
 		initSpeed = 60;
 		nameSound = "";
 	};
-	
-	// hacks
-	
-	class FLAY_1Rnd_DummyArrow1 : CA_Magazine {
-		scope = 0;
-		displayname = "Back Quiver (maghack)";
-		displayNameShort = "Back Quiver";
-		descriptionshort = "FLAY_1Rnd_DummyArrow1";
-		picture = "\FLAY\FLAY_Archery\UI\gear_flay_arrows_ca";
-		model = "\A3\weapons_f\empty";
-		ammo = "B_DummyArrow";
-		count = 1;
-		initspeed = 0;
-		type = 0;
-	};
-	class FLAY_1Rnd_DummyArrow2 : FLAY_1Rnd_DummyArrow1 {
-		scope = 0;
-		displayname = "FLAY_1Rnd_DummyArrow2";
-		displayNameShort = "FLAY_1Rnd_DummyArrow2";
-		descriptionshort = "FLAY_1Rnd_DummyArrow2";
-	};
-	class FLAY_1Rnd_DummyArrow3 : FLAY_1Rnd_DummyArrow1 {
-		scope = 0;
-		displayname = "Bow Quiver (maghack)";
-		displayNameShort = "Bow Quiver";
-		descriptionshort = "FLAY_1Rnd_DummyArrow3";
-	};
-	class FLAY_1Rnd_DummyArrow4 : FLAY_1Rnd_DummyArrow1 {
-		scope = 0;
-		displayname = "Belt Quiver (maghack)";
-		displayNameShort = "Belt Quiver";
-		descriptionshort = "FLAY_1Rnd_DummyArrow4";
-	};	
 };
 
 class CfgAmmo {
