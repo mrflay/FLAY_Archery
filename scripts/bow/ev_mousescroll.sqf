@@ -7,36 +7,12 @@ _handled = false;
 // don't trigger when (any) dialog is shown.
 if (dialog) exitWith { false };
 
-_weapon = currentWeapon player;
-_isBow = isClass (configFile >> "CfgWeapons" >> _weapon >> "FLAY_BowInfo");
-if (not _isBow) exitWith { false; };
+_reload = _button < 0;
+_unload = _button > 0;
 
-_bowState = getText (configFile >> "CfgWeapons" >> _weapon >> "FLAY_BowInfo" >> "state");
-if (_bowState == "empty") then {
-	if (_button < 0) then {
-		_canReload = [] call FLAY_fnc_CanReloadBow;
-		if (not _canReload) exitWith { true; };
-		_handled=true;
-		["next"] call FLAY_fnc_SetBowState;
-	};
-};
-
-if (_bowState == "loaded") then {
-	if (_button < 0) then {
-		_handled = true;
-		["next"] call FLAY_fnc_SetBowState;
-	};
-	if (_button > 0) then {
-		_handled = true;
-		["prev"] call FLAY_fnc_SetBowState;
-	};
-};
-
-if (_bowState == "drawn") then {
-	if (_button > 0) then {
-		_handled = true;
-		["prev"] call FLAY_fnc_SetBowState;
-	};
+if (_reload or _unload) then {
+	_action = if (_reload) then {"reload"} else {"unload"};
+	_handled = [_action] call FLAY_fnc_ReloadBow;
 };
 
 _handled;
