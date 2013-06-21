@@ -4,12 +4,20 @@ _ctrl = _this select 0;
 _button = _this select 1;
 _handled = false;
 
-// only run next part if not in inventory dialog
-if (dialog) exitWith { false };
+player globalchat "ev_mousebuttondown.sqf";
 
 _weapon = currentWeapon player;
 _isBow = isClass (configFile >> "CfgWeapons" >> _weapon >> "FLAY_BowInfo");
 if (not _isBow) exitWith { false; };
+
+if (dialog) then {
+	// remember inventory state to see if anything changed,
+	// when mousebutton is released.
+	[] call FLAY_fnc_StoreInventoryState;
+};
+
+// only run next part if not in inventory dialog
+if (dialog) exitWith { false };
 
 _bowState =  getText (configFile >> "CfgWeapons" >> _weapon >> "FLAY_BowInfo" >> "state");
 if (_bowState == "loaded") then {

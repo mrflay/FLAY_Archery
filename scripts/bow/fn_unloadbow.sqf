@@ -1,0 +1,1 @@
+["empty"] call FLAY_fnc_SetBowState;

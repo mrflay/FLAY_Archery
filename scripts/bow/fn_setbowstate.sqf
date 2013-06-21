@@ -9,8 +9,26 @@ if (not _isBow) exitWith {
 	false; 
 };
 
-_this spawn {
-	_unit = player;
+_animate = true;
+
+if (count _this > 1) then {
+	_animate = _this select 1;
+};
+
+if (_animate) then {
+	player globalchat "animate == true";
+	_this spawn {
+		_unit = player;
+		_muzzle = currentMuzzle _unit;
+		if (_muzzle == "ArrowMuzzle") then {
+			_this call FLAY_fnc_SetBackQuiverState;
+		};
+		if (_muzzle == "QuiverMuzzle") then {
+			_this call FLAY_fnc_SetBowQuiverState;
+		};
+	};
+} else {
+	player globalchat "animate == false";
 	_muzzle = currentMuzzle _unit;
 	if (_muzzle == "ArrowMuzzle") then {
 		_this call FLAY_fnc_SetBackQuiverState;
@@ -18,4 +36,4 @@ _this spawn {
 	if (_muzzle == "QuiverMuzzle") then {
 		_this call FLAY_fnc_SetBowQuiverState;
 	};
-};
+}

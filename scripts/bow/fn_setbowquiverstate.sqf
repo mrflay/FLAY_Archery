@@ -1,10 +1,15 @@
-private ["_unit", "_next", "_magazines", "_magazine", "_muzzle", "_weapon", "_items"];
+private ["_unit", "_animate", "_next", "_magazines", "_magazine", "_muzzle", "_weapon", "_items"];
 private ["_currentState", "_nextWeapon", "_autoLoadMagazine", "_reloadAction", "_unloadAction"];
 private ["_quiver", "_quiverCount", "_nextQuiver", "_prevQuiver"];
 private ["_filteredMagazines", "_filteredMagazines"];
 
 _unit = player;
 _next = _this select 0;
+_animate = true;
+
+if (count _this > 1) then {
+	_animate = _this select 1;
+};
 
 _magazines = magazines _unit;
 _magazine = currentMagazine _unit;
@@ -46,11 +51,11 @@ _autoLoadMagazine = getNumber (configFile >> "CfgWeapons" >> _nextWeapon >> "FLA
 _reloadAction =  getText (configFile >> "CfgWeapons" >> _weapon >> _muzzle >> "reloadAction");
 _unloadAction =  getText (configFile >> "CfgWeapons" >> _weapon >> _muzzle >> "unloadAction");
 
-if (_next == "next") then {
+if (_next == "next" and _animate) then {
 	_unit playActionNow _reloadAction;
 };
 
-if (_next == "prev") then {
+if (_next == "prev" and _animate) then {
 	_unit playActionNow _unloadAction;
 };
 
@@ -68,7 +73,9 @@ if (_currentState == "empty" and _next == "next") then {
 	if (_quiverPoint != "") then {
 		_unit addPrimaryWeaponItem _quiverPoint;
 	};
-	sleep 0.5;
+	if (_animate) then {
+		sleep 0.5;
+	};
 };
 
 // unloading bow, putting arrow back in quiver
@@ -122,7 +129,7 @@ if (_currentState == "drawn" and _next == "empty") then {
 
 { if (_x != "") then { player addPrimaryWeaponItem _x; }; } forEach _items;
 
-if (_currentState == "drawn" and _next == "empty") then {
+if (_currentState == "drawn" and _next == "empty" and _animate) then {
 	sleep 0.5; // temporary for testing
 	_unit playActionNow _reloadAction; // when drawn reloadAction is the fire animation
 };	

@@ -21,17 +21,17 @@ class AnimationSources;
 
 class CfgVehicles {
 
-	class Man;
-	class CAManBase {
-		class EventHandlers: DefaultEventHandlers {
-			init = "_scr = _this execVM ""flay\flay_archery\scripts\bow_init.sqf"";";
-			fired = "_this call FLAY_Effects_EH_Fired;";
-			killed = "_this call FLAY_Effects_EH_Killed;";
-			handledamage = "_this call FLAY_EH_HandleDamage;";
-			hitpart = "_this call FLAY_EH_HitPart;";
-			hit = "_this call FLAY_EH_Hit;";	
-		};
-	};
+	//class Man;
+	//class CAManBase {
+	//	class EventHandlers: DefaultEventHandlers {
+	//		init = "_scr = _this execVM ""flay\flay_archery\scripts\bow_init.sqf"";";
+	//		fired = "_this call FLAY_Effects_EH_Fired;";
+	//		killed = "_this call FLAY_Effects_EH_Killed;";
+	//		handledamage = "_this call FLAY_EH_HandleDamage;";
+	//		hitpart = "_this call FLAY_EH_HitPart;";
+	//		hit = "_this call FLAY_EH_Hit;";	
+	//	};
+	//};
 
 	class Static;
 	class FLAY_Arrow: Static
@@ -226,7 +226,7 @@ class CfgWeapons {
 			next = "FLAY_CompoundBowLoaded";
 			empty = "FLAY_CompoundBow";
 			loaded = "FLAY_CompoundBowLoaded";
-			drawn = "FLAY_CompoundBowDrawn";			
+			drawn = "FLAY_CompoundBowDrawn";		
 
 		};
 		class ArrowMuzzle: ArrowMuzzle
@@ -277,7 +277,7 @@ class CfgWeapons {
 			state = "loaded";
 			prev = "FLAY_CompoundBow";
 			next = "FLAY_CompoundBowDrawn";
-			load = 0;
+			load = 1; // temp test should be 0
 		};
 		displayName = "Compound Bow 2 (loaded)";
 		model = "\FLAY\FLAY_Archery\FLAY_CompoundBowLoaded";
@@ -286,13 +286,19 @@ class CfgWeapons {
 		{
 			reloadAction = "GestureReloadArrow";
 			unloadAction = "GestureReloadBackQuiver";
-			autoReload = 0; 
+			autoReload = 0;
+			dispersion = 1;
+			initSpeed = 1;
+			typicalSpeed = 1;			
 		};
 		class QuiverMuzzle: QuiverMuzzle
 		{
 			reloadAction = "GestureReloadArrow";
 			unloadAction = "GestureReloadBowQuiver";
-			autoReload = 0; 
+			autoReload = 0;
+			dispersion = 1;
+			initSpeed = 1;
+			typicalSpeed = 1;
 		};		
 		class Library {
 			libtextdesc = "Compound Bow";
@@ -360,6 +366,7 @@ class CfgMagazines {
 		lastroundstracer = 0;
 		scope = 2;
 		tracersevery = 0;
+		FLAY_point = "";
 	};
 	class FLAY_7Rnd_Arrow : CA_Magazine {
 		displayname = "Arrow";
@@ -373,6 +380,7 @@ class CfgMagazines {
 		lastroundstracer = 0;
 		scope = 2;
 		tracersevery = 0;
+		FLAY_point = "";
 	};		
 	class FLAY_1Rnd_PrecisionArrow: CA_Magazine
 	{
@@ -389,6 +397,7 @@ class CfgMagazines {
 		initSpeed = 120;
 		nameSound = "";
 		maxLeadSpeed = 50;
+		FLAY_point = "FLAY_point_Precision";
 	};
 	class FLAY_7Rnd_PrecisionArrow: CA_Magazine
 	{
@@ -405,6 +414,7 @@ class CfgMagazines {
 		initSpeed = 120;
 		nameSound = "";
 		maxLeadSpeed = 50;
+		FLAY_point = "FLAY_point_Precision";
 	};	
 	class FLAY_1Rnd_BroadheadArrow: CA_Magazine
 	{
@@ -421,6 +431,7 @@ class CfgMagazines {
 		initSpeed = 90;
 		nameSound = "";
 		maxLeadSpeed = 50;
+		FLAY_point = "FLAY_point_Broadhead";
 	};	
 	class FLAY_7Rnd_BroadheadArrow: CA_Magazine
 	{
@@ -437,6 +448,7 @@ class CfgMagazines {
 		initSpeed = 90;
 		nameSound = "";
 		maxLeadSpeed = 50;
+		FLAY_point = "FLAY_point_Broadhead";
 	};		
 	class FLAY_1Rnd_ExplosiveArrow: CA_Magazine
 	{
@@ -452,6 +464,7 @@ class CfgMagazines {
 		count = 1;
 		initSpeed = 60;
 		nameSound = "";
+		FLAY_point = "FLAY_point_Explosive";
 	};
 	class FLAY_7Rnd_ExplosiveArrow: CA_Magazine
 	{
@@ -467,6 +480,7 @@ class CfgMagazines {
 		count = 1;
 		initSpeed = 60;
 		nameSound = "";
+		FLAY_point = "FLAY_point_Explosive";
 	};	
 	class FLAY_1Rnd_FlameArrow: CA_Magazine
 	{
@@ -482,6 +496,7 @@ class CfgMagazines {
 		count = 1;
 		initSpeed = 60;
 		nameSound = "";
+		FLAY_point = "FLAY_point_Flame";
 	};
 	class FLAY_1Rnd_FlareArrow_Red: CA_Magazine
 	{
@@ -497,6 +512,7 @@ class CfgMagazines {
 		count = 1;
 		initSpeed = 60;
 		nameSound = "";
+		FLAY_point = "FLAY_point_Flare";
 	};	
 	class FLAY_1Rnd_SmokeArrow: CA_Magazine
 	{
@@ -512,6 +528,7 @@ class CfgMagazines {
 		count = 1;
 		initSpeed = 60;
 		nameSound = "";
+		FLAY_point = "FLAY_point_Smoke";
 	};
 };
 
