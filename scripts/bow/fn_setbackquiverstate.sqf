@@ -107,7 +107,7 @@ if (_nextState == "loaded") then {
 			_unit addPrimaryWeaponItem _magazinePoint;
 		} else {
 			_currentPoint = _items select 0;
-			_unit removePrimaryWeaponItem _currentPoint;
+			_unit removeItemFromPrimaryWeapon _currentPoint;
 		};
 		//_currentPoint = _items select 0;
 		//if (_currentPoint == "") then {

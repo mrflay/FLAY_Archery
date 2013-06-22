@@ -61,13 +61,13 @@ if (_next == "prev" and _animate) then {
 
 // loading bow, removing arrow from quiver
 if (_state == "empty" and _next == "next") then {
-	_unit removePrimaryWeaponItem _quiver;
+	_unit removeItemFromPrimaryWeapon _quiver;
 	_unit addPrimaryWeaponItem _prevQuiver;
 	_unit addMagazine _quiverMagazine;
 	// handle arrow point
 	_arrowPoint = _items select 0;
 	if (_arrowPoint != "") then {
-		_unit removePrimaryWeaponItem _arrowPoint;
+		_unit removeItemFromPrimaryWeapon _arrowPoint;
 		//_unit addItem _arrowPoint;
 	};
 	if (_quiverPoint != "") then {
@@ -80,13 +80,13 @@ if (_state == "empty" and _next == "next") then {
 
 // unloading bow, putting arrow back in quiver
 if (_state == "loaded" and _next == "prev") then {
-	_unit removePrimaryWeaponItem _quiver;
+	_unit removeItemFromPrimaryWeapon _quiver;
 	_unit addPrimaryWeaponItem _nextQuiver;
 	_unit removeMagazine _quiverMagazine;
 	// handle arrow point
 	_arrowPoint = _items select 0;
 	if (_arrowPoint != "") then {
-		_unit removePrimaryWeaponItem _point;
+		_unit removeItemFromPrimaryWeapon _point;
 		//_unit addItem _point;
 	};	
 };
@@ -146,7 +146,7 @@ if (_nextState == "loaded") then {
 			_unit addPrimaryWeaponItem _magazinePoint;
 		} else {
 			_currentPoint = _items select 0;
-			_unit removePrimaryWeaponItem _currentPoint;
+			_unit removeItemFromPrimaryWeapon _currentPoint;
 		};
 		//_currentPoint = _items select 0;
 		//if (_currentPoint == "") then {

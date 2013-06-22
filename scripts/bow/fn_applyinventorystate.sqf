@@ -59,10 +59,10 @@
 					if (_point != "") then {
 						_unit addPrimaryWeaponItem _point;
 					} else {
-						_unit removePrimaryWeaponItem _newMuzzleAcc;
+						_unit removeItemFromPrimaryWeapon _newMuzzleAcc;
 					};
 				} else {
-					_unit removePrimaryWeaponItem _newMuzzleAcc;
+					_unit removeItemFromPrimaryWeapon _newMuzzleAcc;
 				};
 				["loaded", false] call FLAY_fnc_SetBowState;
 			};
@@ -72,7 +72,7 @@
 		// while the inventory dialog is open.
 		_currentMagazine = currentMagazine player;
 		if (_currentMagazine == "") then {
-			_unit removePrimaryWeaponItem _newMuzzleAcc;
+			_unit removeItemFromPrimaryWeapon _newMuzzleAcc;
 			["empty", false] call FLAY_fnc_SetBowState;
 			//if (_newMuzzleAcc != "") then {
 			//	_unit addItem _newMuzzleAcc;
