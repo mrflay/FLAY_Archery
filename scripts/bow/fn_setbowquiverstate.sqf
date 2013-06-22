@@ -1,5 +1,5 @@
 private ["_unit", "_animate", "_next", "_magazines", "_magazine", "_muzzle", "_weapon", "_items"];
-private ["_currentState", "_nextWeapon", "_autoLoadMagazine", "_reloadAction", "_unloadAction"];
+private ["_state", "_nextWeapon", "_autoLoadMagazine", "_reloadAction", "_unloadAction"];
 private ["_quiver", "_quiverCount", "_nextQuiver", "_prevQuiver"];
 private ["_filteredMagazines", "_filteredMagazines"];
 
@@ -43,9 +43,9 @@ _quiverPoint = getText (configFile >> "CfgWeapons" >> _quiver >> "FLAY_QuiverInf
 _nextQuiver =  getText (configFile >> "CfgWeapons" >> _quiver >> "FLAY_QuiverInfo" >> "next");
 _prevQuiver =  getText (configFile >> "CfgWeapons" >> _quiver >> "FLAY_QuiverInfo" >> "prev");
 
-_currentState = getText (configFile >> "CfgWeapons" >> _weapon >> "FLAY_BowInfo" >> "state");
+_state = getText (configFile >> "CfgWeapons" >> _weapon >> "FLAY_BowInfo" >> "state");
 _nextWeapon =  getText (configFile >> "CfgWeapons" >> _weapon >> "FLAY_BowInfo" >> _next);
-_autoLoadMagazine = getNumber (configFile >> "CfgWeapons" >> _nextWeapon >> "FLAY_BowInfo" >> "load") > 0;
+_nextState =  getText (configFile >> "CfgWeapons" >> _nextWeapon >> "FLAY_BowInfo" >> "state");
 
 // transition animations
 _reloadAction =  getText (configFile >> "CfgWeapons" >> _weapon >> _muzzle >> "reloadAction");
@@ -60,7 +60,7 @@ if (_next == "prev" and _animate) then {
 };
 
 // loading bow, removing arrow from quiver
-if (_currentState == "empty" and _next == "next") then {
+if (_state == "empty" and _next == "next") then {
 	_unit removePrimaryWeaponItem _quiver;
 	_unit addPrimaryWeaponItem _prevQuiver;
 	_unit addMagazine _quiverMagazine;
@@ -79,7 +79,7 @@ if (_currentState == "empty" and _next == "next") then {
 };
 
 // unloading bow, putting arrow back in quiver
-if (_currentState == "loaded" and _next == "prev") then {
+if (_state == "loaded" and _next == "prev") then {
 	_unit removePrimaryWeaponItem _quiver;
 	_unit addPrimaryWeaponItem _nextQuiver;
 	_unit removeMagazine _quiverMagazine;
@@ -94,42 +94,90 @@ if (_currentState == "loaded" and _next == "prev") then {
 // update _items as quiver may have changed
 _items = primaryWeaponItems _unit;
 _magazines =  magazines _unit;
+
+// returns two element array with magazines for current muzzle in first entry
+// and all other magazines in second entry.
 _filteredMagazines = [_magazines, _weapon, _muzzle] call FLAY_fnc_FilterMagazines;
 
 _unit removeWeapon _weapon;
 { _unit removeMagazines _x; } forEach _magazines; // ensures that weapon is not auto loaded
 
-// Adding mags before weapon ensures that the weapon
-// will be auto loaded with a magazine.
-if (_autoLoadMagazine) then {
-	_filteredMagazine = (_filteredMagazines select 0) select 0;
-	_unit addMagazine _filteredMagazine;
+if (_nextState == "empty") then {
+	// add weapon first
+	_unit addWeapon _nextWeapon;
+	_unit selectWeapon _muzzle;
+	// add magazines
+	{ _unit addMagazine _x; } forEach _magazines;
+	//if (_magazine != "") then {
+	//	_unit addMagazine _magazine;
+	//};
 };
 
-_unit addWeapon _nextWeapon;
-_unit selectWeapon _muzzle;
-
-// Adding mags after the weapon ensures that the magazine
-// will NOT be auto loaded.
-if (not _autoLoadMagazine) then {
-	_filteredMagazine = (_filteredMagazines select 0) select 0;
-	_unit addMagazine _filteredMagazine;
+if (_nextState == "loaded") then {
+	
+	// reload
+	if (_state == "empty") then {
+		{ _unit addMagazine _x; } forEach (_filteredMagazines select 0);
+		// add weapon
+		_unit addWeapon _nextWeapon;
+		_unit selectWeapon _muzzle;
+		// add magazines for other weapon / muzzles after weapon to prevent
+		// auto-loading them (which will make them disappear when switching state).
+		{ _unit addMagazine _x; } forEach (_filteredMagazines select 1);
+	};
+	
+	// unload
+	if (_state == "drawn") then {
+		// add loaded magazine first
+		_unit addMagazine _magazine;
+		// add weapon
+		_unit addWeapon _nextWeapon;
+		_unit selectWeapon _muzzle;	
+		// add remaining magazines
+		{ _unit addMagazine _x; } forEach _magazines;
+	};
+	
+	// ensure the arrow point is updated according to loaded magazine
+	_magazine = currentMagazine _unit;
+	_magazineHasPoint = isText (configFile >> "CfgMagazines" >> _magazine >> "FLAY_Point");
+	if (_magazineHasPoint) then {
+		_magazinePoint = getText (configFile >> "CfgMagazines" >> _magazine >> "FLAY_Point");
+		if (_magazinePoint != "") then {
+			_unit addPrimaryWeaponItem _magazinePoint;
+		} else {
+			_currentPoint = _items select 0;
+			_unit removePrimaryWeaponItem _currentPoint;
+		};
+		//_currentPoint = _items select 0;
+		//if (_currentPoint == "") then {
+		//	_unit addItem _magazinePoint;
+		//};	
+	};
 };
 
-// add all other magazines
-{ _unit addMagazine _x; } forEach (_filteredMagazines select 1);
-
-if (_currentState == "drawn" and _next == "prev") then {
-	_unit addMagazine _magazine;
+if (_nextState == "drawn") then {
+	// add the currently loaded magazine first
+	if (_magazine != "") then {
+		_unit addMagazine _magazine;
+	};
+	// add weapon
+	_unit addWeapon _nextWeapon;
+	_unit selectWeapon _muzzle;
+	// add remaining magazines
+	{ _unit addMagazine _x; } forEach _magazines;
 };
 
-if (_currentState == "drawn" and _next == "empty") then {
-	_items = [_items select 1, _items select 2]; // drop the arrow point when fired
+
+// drop the arrow point when bow is fired
+if (_nextState == "empty") then {
+	_items = [_items select 1, _items select 2];
 };
 
+// add all attachments
 { if (_x != "") then { player addPrimaryWeaponItem _x; }; } forEach _items;
 
-if (_currentState == "drawn" and _next == "empty" and _animate) then {
-	sleep 0.5; // temporary for testing
+// let the bow stay drawn for a short period before returning to empty bow state.
+if (_state == "drawn" and _next == "empty" and _animate) then {
+	sleep 0.25; // temporary for testing
 	_unit playActionNow _reloadAction; // when drawn reloadAction is the fire animation
 };	

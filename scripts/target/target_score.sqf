@@ -32,9 +32,9 @@ while { alive player } do {
 			_ihitY = _x select 1;
 			_iscore = _x select 2;
 			_fade = 0.5;
-			_hitIcon = "\tb_arifle_hkump45\ui\FITA_marker_ca.paa";
+			_hitIcon = "\flay\flay_archery\ui\FITA_marker_ca.paa";
 			if (((20 + _sequence - _index) % 20) < 3) then {
-				_hitIcon = "\tb_arifle_hkump45\ui\FITA_marker2_ca.paa";
+				_hitIcon = "\flay\flay_archery\ui\FITA_marker2_ca.paa";
 				_fade = 0;
 				_tscore = _tscore + _iscore;
 				_score2 = _score1;

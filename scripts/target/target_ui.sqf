@@ -26,7 +26,7 @@ while { alive player } do
 
 		player globalchat format ["_centerX:%1, _centerY:%2", str _centerX, str _centerY];
 
-		(_display displayctrl 3002) ctrlsettext "\tb_arifle_hkump45\ui\FITA_marker_ca.paa";
+		(_display displayctrl 3002) ctrlsettext "\flay\flay_archery\ui\FITA_marker_ca.paa";
 		(_display displayctrl 3002) ctrlsetfade 0;
 		(_display displayctrl 3002) ctrlsetposition [_hitX + _centerX, _hitY + _centerY];
 		(_display displayctrl 3002) ctrlcommit 0;

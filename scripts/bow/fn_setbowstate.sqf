@@ -16,7 +16,6 @@ if (count _this > 1) then {
 };
 
 if (_animate) then {
-	player globalchat "animate == true";
 	_this spawn {
 		_unit = player;
 		_muzzle = currentMuzzle _unit;
@@ -28,7 +27,6 @@ if (_animate) then {
 		};
 	};
 } else {
-	player globalchat "animate == false";
 	_muzzle = currentMuzzle _unit;
 	if (_muzzle == "ArrowMuzzle") then {
 		_this call FLAY_fnc_SetBackQuiverState;

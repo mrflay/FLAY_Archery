@@ -4,8 +4,8 @@ class CfgPatches
  {
 	requiredaddons[] = {};
 	requiredversion = 0.1;
-	units[] = {"FLAY_Target_FITA_122","FLAY_Target_Fold"};
-	weapons[] = {"FLAY_CompoundBow","FLAY_RecurveBow","FLAY_Arrow"};
+	units[] = {"FLAY_Target_FITA_122"};
+	weapons[] = {"FLAY_CompoundBow","FLAY_RecurveBow"};
 	magazines[] = {"FLAY_1Rnd_Arrow","FLAY_1Rnd_BroadheadArrow","FLAY_1Rnd_ExplosiveArrow","FLAY_1Rnd_SmokeArrow","FLAY_1Rnd_FlareArrow"};
  };
 };
@@ -220,7 +220,6 @@ class CfgWeapons {
 		muzzles[] = {"ArrowMuzzle","QuiverMuzzle"};
 		class FLAY_BowInfo: FLAY_BowInfo {
 			scope = 2;
-			load = 0; // auto load magazine, 1=yes, 0=no
 			state = "empty";
 			prev = "FLAY_CompoundBow";
 			next = "FLAY_CompoundBowLoaded";
@@ -231,7 +230,7 @@ class CfgWeapons {
 		};
 		class ArrowMuzzle: ArrowMuzzle
 		{
-			displayName = "Compound Bow";
+			displayName = "(Backpack)     Compound Bow";
 			cursor = "EmptyCursor";
 			cursoraim = "arifle";
 			magazines[] = {
@@ -249,7 +248,7 @@ class CfgWeapons {
 		};
 		class QuiverMuzzle: ArrowMuzzle
 		{
-			displayName = "Compound Bow";
+			displayName = "(Quiver)        Compound Bow";
 			cursor = "EmptyCursor";
 			cursoraim = "arifle";
 			magazines[] = {
@@ -277,9 +276,8 @@ class CfgWeapons {
 			state = "loaded";
 			prev = "FLAY_CompoundBow";
 			next = "FLAY_CompoundBowDrawn";
-			load = 1; // temp test should be 0
 		};
-		displayName = "Compound Bow 2 (loaded)";
+		displayName = "Compound Bow (loaded)";
 		model = "\FLAY\FLAY_Archery\FLAY_CompoundBowLoaded";
 		handanim[] = {"OFP2_ManSkeleton","FLAY\FLAY_Archery\anim\handanim_compoundbow.rtm"};
 		class ArrowMuzzle: ArrowMuzzle
@@ -297,8 +295,8 @@ class CfgWeapons {
 			unloadAction = "GestureReloadBowQuiver";
 			autoReload = 0;
 			dispersion = 1;
-			initSpeed = 1;
-			typicalSpeed = 1;
+			initSpeed = 1;// test: no effect?
+			typicalSpeed = 1;//test: no effect?
 		};		
 		class Library {
 			libtextdesc = "Compound Bow";
@@ -312,9 +310,8 @@ class CfgWeapons {
 			state = "drawn";
 			prev = "FLAY_CompoundBowLoaded";
 			next = "FLAY_CompoundBowDrawn";
-			load = 1;
 		};
-		displayName = "Compound Bow 2 (drawn)";
+		displayName = "Compound Bow (drawn)";
 		model = "\FLAY\FLAY_Archery\FLAY_CompoundBowDrawn";
 		handanim[] = {"OFP2_ManSkeleton","FLAY\FLAY_Archery\anim\handanim_compoundbow.rtm"};
 		class ArrowMuzzle: ArrowMuzzle
@@ -338,17 +335,93 @@ class CfgWeapons {
 		};
 	};	
 	
-	class FLAY_RecurveBow: FLAY_Archery_Bow {
+	class FLAY_RecurveBow: FLAY_CompoundBow {
 		scope = 2;
 		displayName = "Recurve Bow";
 		descriptionshort = "Recurve Bow<br />Draw Length: 28""<br />Draw Weight: 60 lbs<br />String: 58.5""";		
 		picture = "\FLAY\FLAY_Archery\UI\gear_flay_recurve_x_ca";
 		model = "FLAY\FLAY_Archery\FLAY_RecurveBow";
 		handanim[] = {"OFP2_ManSkeleton","FLAY\FLAY_Archery\anim\handanim_recurvebow.rtm"};
+		class FLAY_BowInfo: FLAY_BowInfo {
+			scope = 2;
+			state = "empty";
+			prev = "FLAY_RecurveBow";
+			next = "FLAY_RecurveBowLoaded";
+			empty = "FLAY_RecurveBow";
+			loaded = "FLAY_RecurveBowLoaded";
+			drawn = "FLAY_RecurveBowDrawn";		
+
+		};
+		class ArrowMuzzle: ArrowMuzzle
+		{
+			displayName = "(Backpack)      Recurve Bow";
+		};
+		class QuiverMuzzle: QuiverMuzzle
+		{
+			displayName = "(Quiver)         Recurve Bow";
+		};
 		class Library {
 			libtextdesc = "Recurve Bow";
 		};	
 	};
+	
+	class FLAY_RecurveBowLoaded: FLAY_CompoundBowLoaded {
+		scope = 2;
+		class FLAY_BowInfo: FLAY_BowInfo {
+			scope = 2;
+			state = "loaded";
+			prev = "FLAY_RecurveBow";
+			next = "FLAY_RecurveBowDrawn";
+			empty = "FLAY_RecurveBow";
+			loaded = "FLAY_RecurveBowLoaded";
+			drawn = "FLAY_RecurveBowDrawn";				
+		};
+		displayName = "Recurve Bow (loaded)";
+		descriptionshort = "Recurve Bow<br />Draw Length: 28""<br />Draw Weight: 60 lbs<br />String: 58.5""";		
+		picture = "\FLAY\FLAY_Archery\UI\gear_flay_recurve_x_ca";
+		model = "\FLAY\FLAY_Archery\FLAY_RecurveBowLoaded";
+		handanim[] = {"OFP2_ManSkeleton","FLAY\FLAY_Archery\anim\handanim_recurvebow.rtm"};
+		class ArrowMuzzle: ArrowMuzzle
+		{
+			displayName = "(Backpack)      Recurve Bow";
+		};
+		class QuiverMuzzle: QuiverMuzzle
+		{
+			displayName = "(Quiver)         Recurve Bow";
+		};
+		class Library {
+			libtextdesc = "Recurve Bow";
+		};
+	};
+	
+	class FLAY_RecurveBowDrawn: FLAY_CompoundBowDrawn {
+		scope = 2;
+		class FLAY_BowInfo: FLAY_BowInfo {
+			scope = 2;
+			state = "drawn";
+			prev = "FLAY_RecurveBowLoaded";
+			next = "FLAY_RecurveBowDrawn";
+			empty = "FLAY_RecurveBow";
+			loaded = "FLAY_RecurveBowLoaded";
+			drawn = "FLAY_RecurveBowDrawn";				
+		};
+		displayName = "Recurve Bow (drawn)";
+		descriptionshort = "Recurve Bow<br />Draw Length: 28""<br />Draw Weight: 60 lbs<br />String: 58.5""";		
+		picture = "\FLAY\FLAY_Archery\UI\gear_flay_recurve_x_ca";		
+		model = "\FLAY\FLAY_Archery\FLAY_RecurveBowDrawn";
+		handanim[] = {"OFP2_ManSkeleton","FLAY\FLAY_Archery\anim\handanim_recurvebow.rtm"};
+		class ArrowMuzzle: ArrowMuzzle
+		{
+			displayName = "(Backpack)      Recurve Bow";
+		};
+		class QuiverMuzzle: QuiverMuzzle
+		{
+			displayName = "(Quiver)         Recurve Bow";
+		};			
+		class Library {
+			libtextdesc = "Recurve Bow";
+		};
+	};		
 };
 
 class CfgMagazines {
@@ -367,6 +440,8 @@ class CfgMagazines {
 		scope = 2;
 		tracersevery = 0;
 		FLAY_point = "";
+		useAction = 0;
+		useActionTitle = "";
 	};
 	class FLAY_7Rnd_Arrow : CA_Magazine {
 		displayname = "Arrow";
@@ -381,6 +456,8 @@ class CfgMagazines {
 		scope = 2;
 		tracersevery = 0;
 		FLAY_point = "";
+		useAction = 0;
+		useActionTitle = "";
 	};		
 	class FLAY_1Rnd_PrecisionArrow: CA_Magazine
 	{
@@ -398,6 +475,8 @@ class CfgMagazines {
 		nameSound = "";
 		maxLeadSpeed = 50;
 		FLAY_point = "FLAY_point_Precision";
+		useAction = 0;
+		useActionTitle = "";
 	};
 	class FLAY_7Rnd_PrecisionArrow: CA_Magazine
 	{
@@ -415,6 +494,8 @@ class CfgMagazines {
 		nameSound = "";
 		maxLeadSpeed = 50;
 		FLAY_point = "FLAY_point_Precision";
+		useAction = 0;
+		useActionTitle = "";
 	};	
 	class FLAY_1Rnd_BroadheadArrow: CA_Magazine
 	{
@@ -432,6 +513,8 @@ class CfgMagazines {
 		nameSound = "";
 		maxLeadSpeed = 50;
 		FLAY_point = "FLAY_point_Broadhead";
+		useAction = 0;
+		useActionTitle = "";
 	};	
 	class FLAY_7Rnd_BroadheadArrow: CA_Magazine
 	{
@@ -449,6 +532,8 @@ class CfgMagazines {
 		nameSound = "";
 		maxLeadSpeed = 50;
 		FLAY_point = "FLAY_point_Broadhead";
+		useAction = 0;
+		useActionTitle = "";
 	};		
 	class FLAY_1Rnd_ExplosiveArrow: CA_Magazine
 	{
@@ -465,6 +550,8 @@ class CfgMagazines {
 		initSpeed = 60;
 		nameSound = "";
 		FLAY_point = "FLAY_point_Explosive";
+		useAction = 0;
+		useActionTitle = "";
 	};
 	class FLAY_7Rnd_ExplosiveArrow: CA_Magazine
 	{
@@ -481,6 +568,8 @@ class CfgMagazines {
 		initSpeed = 60;
 		nameSound = "";
 		FLAY_point = "FLAY_point_Explosive";
+		useAction = 0;
+		useActionTitle = "";
 	};	
 	class FLAY_1Rnd_FlameArrow: CA_Magazine
 	{
@@ -659,25 +748,7 @@ class CfgAmmo {
 		timeToLive = 900;
 		fuseDistance = 0;
 		triggerTime = 0.01;
-	};
-	
-	class B_DummyArrow: BulletBase
-	{
-		typicalspeed = 0;
-		visibleFire = 0;
-		audibleFire = 0;
-		visibleFireTime = 0;
-		fuseDistance = 1;
-		hit = 0;
-		indirectHit = 0;
-		indirectHitRange = 0;
-		explosive = 0;
-		cost = 999999;
-		value = 0;
-		timeToLive = 0;
-		triggerTime = 0;
-	};	
-		
+	};		
 };
 
 	

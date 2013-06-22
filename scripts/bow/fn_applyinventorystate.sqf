@@ -1,5 +1,3 @@
-player globalchat "fn_applyinventorystate.sqf";
-
 //_this spawn {
 
 	disableserialization;
@@ -24,18 +22,9 @@ player globalchat "fn_applyinventorystate.sqf";
 	_oldOpticAcc = _oldState select 3;
 	_oldMagazine = _oldState select 4;
 
-	_hasChanged = false;
-
-	if (_newWeapon != _oldWeapon) then {
-		_hasChanged = true;
-	};
-
 	if (_newMuzzleAcc != _oldMuzzleAcc) then {
-		_hasChanged = true;
-		player globalchat "_newMuzzleAcc != _oldMuzzleAcc";
 		// fixme: handle this in a nicer way!
 		if (_oldMagazine != "") then {
-			player globalchat "_oldMagazine != ''";
 			_magazines = magazines _unit;
 			_weapon = currentWeapon _unit;
 			_unit removeWeapon _weapon;
@@ -75,23 +64,21 @@ player globalchat "fn_applyinventorystate.sqf";
 				} else {
 					_unit removePrimaryWeaponItem _newMuzzleAcc;
 				};
-				//["loaded", false] call FLAY_fnc_SetBowState; // test
+				["loaded", false] call FLAY_fnc_SetBowState;
 			};
-			if (_newMagazine == "") then {
-				_unit removePrimaryWeaponItem _newMuzzleAcc;
-				["empty", false] call FLAY_fnc_SetBowState;
-			};
-			if (_oldMagazine == "") then {
-				
-			};
-			
-			//if (_newMagazine != "") then {
-			//	_unit addItem _oldMuzzleAcc;
-			//};	
+		};
+		// Using current magazine since primaryWeaponMagazine does not
+		// report magazine correctly if weapon is swithed using script
+		// while the inventory dialog is open.
+		_currentMagazine = currentMagazine player;
+		if (_currentMagazine == "") then {
+			_unit removePrimaryWeaponItem _newMuzzleAcc;
+			["empty", false] call FLAY_fnc_SetBowState;
+			//if (_newMuzzleAcc != "") then {
+			//	_unit addItem _newMuzzleAcc;
+			//};
 		};
 	};
 	
 	[] call FLAY_fnc_StoreInventoryState;
 //};
-
-_hasChanged;

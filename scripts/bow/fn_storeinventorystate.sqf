@@ -1,8 +1,6 @@
 disableserialization;
 private ["_state","_unit","_weapon","_items","_muzzleAcc","_sideAcc","_opticAcc","_magazine"];
 
-player globalchat "fn_storeinventorystate.sqf";
-
 _unit = player;
 _weapon = currentWeapon _unit;
 _items = primaryWeaponItems _unit;

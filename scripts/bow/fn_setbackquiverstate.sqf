@@ -10,15 +10,17 @@ if (count _this > 1) then {
 };
 
 _magazines = magazines _unit;
-_magazine = currentMagazine _unit;
+//_magazine = currentMagazine _unit;
 _weapon = currentWeapon _unit;
 _muzzle = currentMuzzle _unit;
 _items = primaryWeaponItems _unit;
 
+_magazine = primaryWeaponMagazine _unit;
+_magazine = if (count _magazine == 0) then {""} else {_magazine select 0};
+
 _state = getText (configFile >> "CfgWeapons" >> _weapon >> "FLAY_BowInfo" >> "state");
 _nextWeapon =  getText (configFile >> "CfgWeapons" >> _weapon >> "FLAY_BowInfo" >> _next);
 _nextState =  getText (configFile >> "CfgWeapons" >> _nextWeapon >> "FLAY_BowInfo" >> "state");
-_autoLoadMagazine = getNumber (configFile >> "CfgWeapons" >> _nextWeapon >> "FLAY_BowInfo" >> "load") > 0;
 
 // transition animations
 _reloadAction =  getText (configFile >> "CfgWeapons" >> _weapon >> _muzzle >> "reloadAction");
@@ -45,8 +47,10 @@ if (_nextState == "empty") then {
 	_unit selectWeapon _muzzle;
 	// add magazines
 	{ _unit addMagazine _x; } forEach _magazines;
-	if (_magazine != "") then {
-		_unit addMagazine _magazine;
+	if (_state == "loaded" and (not dialog)) then {
+		if (_magazine != "") then {
+			_unit addMagazine _magazine;
+		};
 	};
 };
 
@@ -54,11 +58,34 @@ if (_nextState == "loaded") then {
 	
 	// reload
 	if (_state == "empty") then {
-		{ _unit addMagazine _x; } forEach _magazines;
+		// fixme: perhaps add a special state when loading from inventory?
+		// add loaded magazine first (special case when working with inventory)
+		if (_magazine != "") then {
+			_unit addMagazine _magazine;
+		} else {
+			{ _unit addMagazine _x; } forEach _magazines;
+		};
 		// add weapon
 		_unit addWeapon _nextWeapon;
-		_unit selectWeapon _muzzle;			
+		_unit selectWeapon _muzzle;
+		// add remaining magazines	(special case when working with inventory)
+		if (_magazine != "") then {
+			{ _unit addMagazine _x; } forEach _magazines;
+		};
 	};
+	
+	// this is a special case when working with inventory
+	// currently loaded magazine is replaced with another one
+	if (_state == "loaded") then {
+		if (_magazine != "") then {
+			_unit addMagazine _magazine;
+		};
+		// add weapon
+		_unit addWeapon _nextWeapon;
+		_unit selectWeapon _muzzle;
+		// add remaining magazines	(special case when working with inventory)
+		{ _unit addMagazine _x; } forEach _magazines;
+	};	
 	
 	// unload
 	if (_state == "drawn") then {
@@ -118,7 +145,7 @@ if (_nextState == "empty") then {
 { if (_x != "") then { player addPrimaryWeaponItem _x; }; } forEach _items;
 
 // let the bow stay drawn for a short period before returning to empty bow state.
-if (_currentState == "drawn" and _next == "empty" and _animate) then {
+if (_state == "drawn" and _next == "empty" and _animate) then {
 	sleep 0.25; // temporary for testing
 	_unit playActionNow _reloadAction; // when drawn reloadAction is the fire animation
 };	

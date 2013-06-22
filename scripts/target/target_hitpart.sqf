@@ -64,7 +64,7 @@ _centerY = _y + _h / 2;
 _sequence = _target getVariable ["FLAY.archery.target.state.sequence", -1];
 _sequence = (_sequence + 1) % 20;
 
-(_display displayCtrl (_sequence + 3002)) ctrlSetText "\tb_arifle_hkump45\ui\FITA_marker2_ca.paa";
+(_display displayCtrl (_sequence + 3002)) ctrlSetText "\flay\flay_archery\ui\FITA_marker2_ca.paa";
 (_display displayCtrl (_sequence + 3002)) ctrlSetPosition [_hitX + _centerX, _centerY - _hitY];
 (_display displayCtrl (_sequence + 3002)) ctrlSetFade 0;
 (_display displayCtrl (_sequence + 3002)) ctrlCommit 0;
@@ -80,9 +80,9 @@ _hits = _target getVariable ["FLAY.archery.target.state.hits", []];
 	_ihitY = _x select 1;
 	_iscore = _x select 2;
 	_fade = 0.5;
-	_hitIcon = "\tb_arifle_hkump45\ui\FITA_marker_ca.paa";
+	_hitIcon = "\flay\flay_archery\ui\FITA_marker_ca.paa";
 	if (((20 + _sequence - _index) % 20) < 3) then {
-		_hitIcon = "\tb_arifle_hkump45\ui\FITA_marker2_ca.paa";
+		_hitIcon = "\flay\flay_archery\ui\FITA_marker2_ca.paa";
 		_fade = 0;
 		_tscore = _tscore + _iscore;
 		_score3 = _score2;
