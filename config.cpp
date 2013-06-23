@@ -759,27 +759,15 @@ class CfgAmmo {
 
 class CfgMovesBasic
 {
-	class DefaultDie;
-	class NoActions;
 	class ManActions
 	{
 		GestureReset[] = {"GestureReset","Gesture"};
-		//GestureReset2[] = {"GestureReset2","Gesture"};
-		//GestureReset3[] = {"GestureReset3","Gesture"};
 		GestureReloadArrowAndFireAi[] = {"GestureReloadArrowAndFireAi","Gesture"};
 		GestureReloadArrow[] = {"GestureReloadArrow","Gesture"};
-		GestureReloadArrow2[] = {"GestureReloadArrow2","Gesture"};
 		GestureReloadBackQuiver[] = {"GestureReloadBackQuiver","Gesture"};
 		GestureReloadBowQuiver[] = {"GestureReloadBowQuiver","Gesture"};
 		GestureReloadBeltQuiver[] = {"GestureReloadBeltQuiver","Gesture"};
-		GestureHandAnim[] = {"GestureHandAnim", "Gesture"};
 	};
-};
-
-class CfgMovesMaleSdr: CfgMovesBasic
-{
-	class Default;
-	class States {};
 };
 
 
@@ -793,18 +781,6 @@ class CfgGesturesMale
 	class Default;
 	class States
 	{	
-		// This is used to reset the animation to default posture 
-		// after an looped gesture.
-		class GestureResetOld: Default
-		{
-			file = "";
-			looped = 0;
-			speed = 0.1;
-			mask = "fullBody";
-			leftHandIKCurve[] = {1};
-			rightHandIKCurve[] = {1};	
-		};
-		
 		class GestureReset: Default
 		{
 			file = "\A3\anims_f\Data\Anim\Sdr\gst\GestureHi.rtm";
@@ -812,19 +788,6 @@ class CfgGesturesMale
 			speed = 10000;
 			mask = "rightHand";
 			rightHandIKCurve[] = {0,1,0.05,0,0.95,0,1,1};
-		};
-		
-		class GestureHandAnim: Default 
-		{
-			file = "FLAY\FLAY_Archery\anim\handanim_compoundbow.rtm";
-			looped = 1;
-			speed = 1;
-			mask = "handsWeapon";
-			rightHandIKCurve[] = {1};
-			leftHandIKCurve[] = {1};
-			canPullTrigger=0;
-			disableWeapons=1;
-			canReload=0;
 		};
 		
 		class GestureReloadArrow: Default
@@ -839,19 +802,6 @@ class CfgGesturesMale
 			canReload=1;
 		};		
 
-		class GestureReloadArrow2: Default
-		{
-			file = "FLAY\FLAY_Archery\anim\reload3b.rtm";
-			looped = 1;
-			speed = 0.1;
-			mask = "handsWeapon";
-			rightHandIKCurve[] = {0};
-			leftHandIKCurve[] = {1};
-			canPullTrigger=1;
-			disableWeapons=0;
-			canReload=1;
-		};		
-		
 		class GestureReloadArrowAndFireAi: Default
 		{
 			file = "FLAY\FLAY_Archery\anim\reload3a.rtm";
@@ -862,7 +812,7 @@ class CfgGesturesMale
 			canPullTrigger=1;
 			disableWeapons=0;
 			canReload=1;
-		};			
+		};
 		
 		class GestureReloadBackQuiver: Default
 		{
@@ -871,7 +821,6 @@ class CfgGesturesMale
 			speed = 2;
 			mask = "rightHand";
 			rightHandIKCurve[] = {0,1,0.05,0,0.95,0,1,1};
-			//rightHandIKCurve[] = {0};
 		};
 
 		class GestureReloadBowQuiver: Default
@@ -881,7 +830,6 @@ class CfgGesturesMale
 			speed = 2;
 			mask = "rightHand";
 			rightHandIKCurve[] = {0,1,0.05,0,0.95,0,1,1};
-			//rightHandIKCurve[] = {0};
 		};
 
 		class GestureReloadBeltQuiver: Default
@@ -891,7 +839,7 @@ class CfgGesturesMale
 			speed = 2;
 			mask = "rightHand";
 			rightHandIKCurve[] = {0,1,0.05,0,0.95,0,1,1};
-			//rightHandIKCurve[] = {0};
+
 		};		
 	};
 };
