@@ -10,8 +10,8 @@
 	_newSideAcc = _newItems select 1;
 	_newOpticAcc = _newItems select 2;
 	
-	_newMagazine = primaryWeaponMagazine _unit;
-	_newMagazine = if (count _newMagazine == 0) then {""} else {_newMagazine select 0};
+	_newMagazine = currentMagazine _unit;
+	//_newMagazine = if (count _newMagazine == 0) then {""} else {_newMagazine select 0};
 
 	_newState = [_newWeapon, _newMuzzleAcc, _newSideAcc, _newOpticAcc, _newMagazine];
 	_oldState = player getVariable ["flay.archery.inventory.state", ["","","","",""]];

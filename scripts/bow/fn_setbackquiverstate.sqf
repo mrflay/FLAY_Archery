@@ -15,8 +15,8 @@ _weapon = currentWeapon _unit;
 _muzzle = currentMuzzle _unit;
 _items = primaryWeaponItems _unit;
 
-_magazine = primaryWeaponMagazine _unit;
-_magazine = if (count _magazine == 0) then {""} else {_magazine select 0};
+_magazine = currentMagazine _unit;
+//_magazine = if (count _magazine == 0) then {""} else {_magazine select 0};
 
 _state = getText (configFile >> "CfgWeapons" >> _weapon >> "FLAY_BowInfo" >> "state");
 _nextWeapon =  getText (configFile >> "CfgWeapons" >> _weapon >> "FLAY_BowInfo" >> _next);
