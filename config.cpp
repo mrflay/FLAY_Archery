@@ -1,13 +1,13 @@
 class CfgPatches
 {
- class FLAY_Archery
- {
-	requiredaddons[] = {};
-	requiredversion = 0.1;
-	units[] = {"FLAY_Target_FITA_122"};
-	weapons[] = {"FLAY_CompoundBow","FLAY_RecurveBow"};
-	magazines[] = {"FLAY_1Rnd_Arrow","FLAY_1Rnd_BroadheadArrow","FLAY_1Rnd_ExplosiveArrow","FLAY_1Rnd_SmokeArrow","FLAY_1Rnd_FlareArrow"};
- };
+	class FLAY_Archery
+	{
+		requiredaddons[] = {};
+		requiredversion = 0.1;
+		units[] = {"FLAY_Target_FITA_122"};
+		weapons[] = {"FLAY_CompoundBow","FLAY_RecurveBow"};
+		magazines[] = {"FLAY_1Rnd_Arrow","FLAY_1Rnd_BroadheadArrow","FLAY_1Rnd_ExplosiveArrow","FLAY_1Rnd_SmokeArrow","FLAY_1Rnd_FlareArrow"};
+	};
 };
 
 class DefaultEventHandlers;
@@ -641,7 +641,8 @@ class CfgAmmo {
 		hit = 8;
 		indirectHit = 0;
 		indirectHitRange = 0;
-		model = "\A3\Weapons_f\Data\bullettracer\tracer_yellow";
+		//model = "\A3\Weapons_f\Data\bullettracer\tracer_yellow";
+		model = "FLAY\FLAY_Archery\FLAY_Arrow";
 		CraterEffects = "NoCrater";
 		explosionEffects = "NoExplosion";
 		explosive = 0;
@@ -664,7 +665,7 @@ class CfgAmmo {
 		hit = 5;
 		indirectHit = 0;
 		indirectHitRange = 0;
-		model = "\A3\Weapons_f\Data\bullettracer\tracer_yellow";
+		model = "FLAY\FLAY_Archery\FLAY_Arrow";
 		CraterEffects = "NoCrater";
 		explosionEffects = "NoExplosion";
 		explosive = 0;
@@ -788,6 +789,7 @@ class CfgGesturesMale
 			speed = 10000;
 			mask = "rightHand";
 			rightHandIKCurve[] = {0,1,0.05,0,0.95,0,1,1};
+			enableOptics = 1;
 		};
 		
 		class GestureReloadArrow: Default
@@ -800,6 +802,8 @@ class CfgGesturesMale
 			canPullTrigger=1;
 			disableWeapons=0;
 			canReload=1;
+			enableOptics = 1;
+			showWeaponAim = 1;
 		};		
 
 		class GestureReloadArrowAndFireAi: Default
@@ -812,6 +816,8 @@ class CfgGesturesMale
 			canPullTrigger=1;
 			disableWeapons=0;
 			canReload=1;
+			enableOptics = 1;
+			showWeaponAim = 1;
 		};
 		
 		class GestureReloadBackQuiver: Default
@@ -821,6 +827,8 @@ class CfgGesturesMale
 			speed = 2;
 			mask = "rightHand";
 			rightHandIKCurve[] = {0,1,0.05,0,0.95,0,1,1};
+			enableOptics = 1;
+			showWeaponAim = 1;
 		};
 
 		class GestureReloadBowQuiver: Default
@@ -830,6 +838,8 @@ class CfgGesturesMale
 			speed = 2;
 			mask = "rightHand";
 			rightHandIKCurve[] = {0,1,0.05,0,0.95,0,1,1};
+			enableOptics = 1;
+			showWeaponAim = 1;
 		};
 
 		class GestureReloadBeltQuiver: Default
@@ -839,7 +849,8 @@ class CfgGesturesMale
 			speed = 2;
 			mask = "rightHand";
 			rightHandIKCurve[] = {0,1,0.05,0,0.95,0,1,1};
-
+			enableOptics = 1;
+			showWeaponAim = 1;
 		};		
 	};
 };
