@@ -27,7 +27,8 @@ if (_bowState == "drawn") then {
 				if ((currentMuzzle player) == "QuiverMuzzle") then {
 					_muzzleIndex = 23;
 				};
-				gameLogic action ["useweapon", player, player, _muzzleIndex];
+				_gameLogic = missionNamespace getVariable "flay.archery.mission.gamelogic";
+				_gameLogic action ["useweapon", player, player, _muzzleIndex];
 				["empty"] call FLAY_fnc_SetBowState;
 			} else {
 				player playActionNow "ResetGesture";
