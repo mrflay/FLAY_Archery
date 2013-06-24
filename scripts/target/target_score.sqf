@@ -1,4 +1,5 @@
 disableserialization;
+waitUntil { alive player };
 while { alive player } do {
 	sleep 1;
 	_targets = nearestObjects [player, ["FLAY_Target_FITA_122"], 4];
