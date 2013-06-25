@@ -114,7 +114,7 @@ class CfgWeapons {
 			};
 
 			reloadAction = "GestureReloadArrowAndFireAi"; // only used by ai, because player reloads using scripts
-			discreteDistance[] = {30};
+			discreteDistance[] = {200};
 			discreteDistanceInitIndex = 0;			
 			sound[] = {"",0.00031622776,1};
 			reloadSound[] = {"",0.00031622776,1};
@@ -279,7 +279,6 @@ class CfgWeapons {
 		};
 		displayName = "Compound Bow (loaded)";
 		model = "\FLAY\FLAY_Archery\FLAY_CompoundBowLoaded";
-		handanim[] = {"OFP2_ManSkeleton","FLAY\FLAY_Archery\anim\handanim_compoundbow.rtm"};
 		class ArrowMuzzle: ArrowMuzzle
 		{
 			reloadAction = "GestureReloadArrow";
@@ -312,8 +311,7 @@ class CfgWeapons {
 			next = "FLAY_CompoundBowDrawn";
 		};
 		displayName = "Compound Bow (drawn)";
-		model = "\FLAY\FLAY_Archery\FLAY_CompoundBowDrawn";
-		handanim[] = {"OFP2_ManSkeleton","FLAY\FLAY_Archery\anim\handanim_compoundbow.rtm"};
+		model = "\FLAY\FLAY_Archery\FLAY_CompoundBowDrawn";	
 		class ArrowMuzzle: ArrowMuzzle
 		{
 			reloadAction = "GestureReset"; // todo: fire animation
@@ -440,8 +438,7 @@ class CfgMagazines {
 		scope = 2;
 		tracersevery = 0;
 		FLAY_point = "";
-		useAction = 0;
-		useActionTitle = "";
+		mass = 2;
 	};
 	class FLAY_7Rnd_Arrow : CA_Magazine {
 		displayname = "Arrow";
@@ -456,8 +453,7 @@ class CfgMagazines {
 		scope = 2;
 		tracersevery = 0;
 		FLAY_point = "";
-		useAction = 0;
-		useActionTitle = "";
+		mass = 2;
 	};		
 	class FLAY_1Rnd_PrecisionArrow: CA_Magazine
 	{
@@ -475,8 +471,7 @@ class CfgMagazines {
 		nameSound = "";
 		maxLeadSpeed = 50;
 		FLAY_point = "FLAY_point_Precision";
-		useAction = 0;
-		useActionTitle = "";
+		mass = 2;
 	};
 	class FLAY_7Rnd_PrecisionArrow: CA_Magazine
 	{
@@ -494,8 +489,7 @@ class CfgMagazines {
 		nameSound = "";
 		maxLeadSpeed = 50;
 		FLAY_point = "FLAY_point_Precision";
-		useAction = 0;
-		useActionTitle = "";
+		mass = 2;
 	};	
 	class FLAY_1Rnd_BroadheadArrow: CA_Magazine
 	{
@@ -513,8 +507,7 @@ class CfgMagazines {
 		nameSound = "";
 		maxLeadSpeed = 50;
 		FLAY_point = "FLAY_point_Broadhead";
-		useAction = 0;
-		useActionTitle = "";
+		mass = 3;
 	};	
 	class FLAY_7Rnd_BroadheadArrow: CA_Magazine
 	{
@@ -532,8 +525,7 @@ class CfgMagazines {
 		nameSound = "";
 		maxLeadSpeed = 50;
 		FLAY_point = "FLAY_point_Broadhead";
-		useAction = 0;
-		useActionTitle = "";
+		mass = 3;
 	};		
 	class FLAY_1Rnd_ExplosiveArrow: CA_Magazine
 	{
@@ -550,8 +542,7 @@ class CfgMagazines {
 		initSpeed = 60;
 		nameSound = "";
 		FLAY_point = "FLAY_point_Explosive";
-		useAction = 0;
-		useActionTitle = "";
+		mass = 4;
 	};
 	class FLAY_7Rnd_ExplosiveArrow: CA_Magazine
 	{
@@ -568,8 +559,7 @@ class CfgMagazines {
 		initSpeed = 60;
 		nameSound = "";
 		FLAY_point = "FLAY_point_Explosive";
-		useAction = 0;
-		useActionTitle = "";
+		mass = 4;
 	};	
 	class FLAY_1Rnd_FlameArrow: CA_Magazine
 	{
@@ -586,6 +576,7 @@ class CfgMagazines {
 		initSpeed = 60;
 		nameSound = "";
 		FLAY_point = "FLAY_point_Flame";
+		mass = 4;
 	};
 	class FLAY_1Rnd_FlareArrow_Red: CA_Magazine
 	{
@@ -602,6 +593,7 @@ class CfgMagazines {
 		initSpeed = 60;
 		nameSound = "";
 		FLAY_point = "FLAY_point_Flare";
+		mass = 4;
 	};	
 	class FLAY_1Rnd_SmokeArrow: CA_Magazine
 	{
@@ -618,6 +610,7 @@ class CfgMagazines {
 		initSpeed = 60;
 		nameSound = "";
 		FLAY_point = "FLAY_point_Smoke";
+		mass = 4;
 	};
 };
 
@@ -794,8 +787,8 @@ class CfgGesturesMale
 		
 		class GestureReloadArrow: Default
 		{
-			file = "FLAY\FLAY_Archery\anim\reload3a.rtm";
-			looped = 0;
+			file = "FLAY\FLAY_Archery\anim\reload.rtm";
+			looped = 1;
 			speed = 0.1;
 			mask = "handsWeapon";
 			rightHandIKCurve[] = {0};
@@ -803,12 +796,11 @@ class CfgGesturesMale
 			disableWeapons=0;
 			canReload=1;
 			enableOptics = 1;
-			showWeaponAim = 1;
 		};		
 
 		class GestureReloadArrowAndFireAi: Default
 		{
-			file = "FLAY\FLAY_Archery\anim\reload3a.rtm";
+			file = "FLAY\FLAY_Archery\anim\reload.rtm";
 			looped = 0;
 			speed = 1;
 			mask = "handsWeapon";
@@ -817,7 +809,6 @@ class CfgGesturesMale
 			disableWeapons=0;
 			canReload=1;
 			enableOptics = 1;
-			showWeaponAim = 1;
 		};
 		
 		class GestureReloadBackQuiver: Default
@@ -828,7 +819,6 @@ class CfgGesturesMale
 			mask = "rightHand";
 			rightHandIKCurve[] = {0,1,0.05,0,0.95,0,1,1};
 			enableOptics = 1;
-			showWeaponAim = 1;
 		};
 
 		class GestureReloadBowQuiver: Default
@@ -839,7 +829,6 @@ class CfgGesturesMale
 			mask = "rightHand";
 			rightHandIKCurve[] = {0,1,0.05,0,0.95,0,1,1};
 			enableOptics = 1;
-			showWeaponAim = 1;
 		};
 
 		class GestureReloadBeltQuiver: Default
@@ -850,7 +839,6 @@ class CfgGesturesMale
 			mask = "rightHand";
 			rightHandIKCurve[] = {0,1,0.05,0,0.95,0,1,1};
 			enableOptics = 1;
-			showWeaponAim = 1;
 		};		
 	};
 };

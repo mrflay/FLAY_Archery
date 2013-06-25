@@ -1,5 +1,10 @@
+
+if (isDedicated) exitWith {};
+
 _unit = _this select 0;
+
 if (_unit == player) then {
+
 	// Adding fired eventhandler using script, since when adding it by
 	// config results in 6:th argument (projectile) being string rather
 	// than object.

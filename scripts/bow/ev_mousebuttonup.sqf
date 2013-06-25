@@ -10,7 +10,9 @@ _isBow = isClass (configFile >> "CfgWeapons" >> _weapon >> "FLAY_BowInfo");
 if (not _isBow) exitWith { false; };
 
 if (dialog) then {
-	[] call FLAY_fnc_ApplyInventoryState;
+	if (_button == 0) then {
+		[] call FLAY_fnc_ApplyInventoryState;
+	};
 };
 
 // only run next part if not in inventory dialog
