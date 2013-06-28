@@ -268,7 +268,7 @@ class cfgWeapons
 		class FLAY_QuiverInfo: FLAY_QuiverInfo {
 			count = 7;
 			next = "FLAY_acc_Quiver_7HE";
-			prev = "FLAY_acc_Quiver_6HE"
+			prev = "FLAY_acc_Quiver_6HE";
 			magazine = "FLAY_7Rnd_ExplosiveArrow";
 			point = "FLAY_point_Explosive";
 		};		
@@ -280,7 +280,7 @@ class cfgWeapons
 		class FLAY_QuiverInfo: FLAY_QuiverInfo {
 			count = 6;
 			next = "FLAY_acc_Quiver_7HE";
-			prev = "FLAY_acc_Quiver_5HE"
+			prev = "FLAY_acc_Quiver_5HE";
 			magazine = "FLAY_7Rnd_ExplosiveArrow";
 			point = "FLAY_point_Explosive";
 		};				
@@ -292,7 +292,7 @@ class cfgWeapons
 		class FLAY_QuiverInfo: FLAY_QuiverInfo {
 			count = 5;
 			next = "FLAY_acc_Quiver_6HE";
-			prev = "FLAY_acc_Quiver_4HE"
+			prev = "FLAY_acc_Quiver_4HE";
 			magazine = "FLAY_7Rnd_ExplosiveArrow";
 			point = "FLAY_point_Explosive";
 		};				
@@ -304,7 +304,7 @@ class cfgWeapons
 		class FLAY_QuiverInfo: FLAY_QuiverInfo {
 			count = 4;
 			next = "FLAY_acc_Quiver_5HE";
-			prev = "FLAY_acc_Quiver_3HE"
+			prev = "FLAY_acc_Quiver_3HE";
 			magazine = "FLAY_7Rnd_ExplosiveArrow";
 			point = "FLAY_point_Explosive";
 		};				
@@ -316,7 +316,7 @@ class cfgWeapons
 		class FLAY_QuiverInfo: FLAY_QuiverInfo {
 			count = 3;
 			next = "FLAY_acc_Quiver_4HE";
-			prev = "FLAY_acc_Quiver_2HE"
+			prev = "FLAY_acc_Quiver_2HE";
 			magazine = "FLAY_7Rnd_ExplosiveArrow";
 			point = "FLAY_point_Explosive";
 		};				
@@ -328,7 +328,7 @@ class cfgWeapons
 		class FLAY_QuiverInfo: FLAY_QuiverInfo {
 			count = 2;
 			next = "FLAY_acc_Quiver_3HE";
-			prev = "FLAY_acc_Quiver_1HE"
+			prev = "FLAY_acc_Quiver_1HE";
 			magazine = "FLAY_7Rnd_ExplosiveArrow";
 			point = "FLAY_point_Explosive";
 		};				
@@ -340,7 +340,7 @@ class cfgWeapons
 		class FLAY_QuiverInfo: FLAY_QuiverInfo {
 			count = 1;
 			next = "FLAY_acc_Quiver_2HE";
-			prev = "FLAY_acc_Quiver_0HE"
+			prev = "FLAY_acc_Quiver_0HE";
 			magazine = "FLAY_7Rnd_ExplosiveArrow";
 			point = "FLAY_point_Explosive";
 		};				
@@ -352,7 +352,7 @@ class cfgWeapons
 		class FLAY_QuiverInfo: FLAY_QuiverInfo {
 			count = 0;
 			next = "FLAY_acc_Quiver_1HE";
-			prev = "FLAY_acc_Quiver_0HE"
+			prev = "FLAY_acc_Quiver_0HE";
 			magazine = "FLAY_7Rnd_ExplosiveArrow";
 			point = "FLAY_point_Explosive";
 		};				
@@ -366,7 +366,7 @@ class cfgWeapons
 		class FLAY_QuiverInfo: FLAY_QuiverInfo {
 			count = 7;
 			next = "FLAY_acc_Quiver_7P";
-			prev = "FLAY_acc_Quiver_6P"
+			prev = "FLAY_acc_Quiver_6P";
 			magazine = "FLAY_7Rnd_PrecisionArrow";
 			point = "FLAY_point_Precision";
 		};				
@@ -378,7 +378,7 @@ class cfgWeapons
 		class FLAY_QuiverInfo: FLAY_QuiverInfo {
 			count = 6;
 			next = "FLAY_acc_Quiver_7P";
-			prev = "FLAY_acc_Quiver_5P"
+			prev = "FLAY_acc_Quiver_5P";
 			magazine = "FLAY_7Rnd_PrecisionArrow";
 			point = "FLAY_point_Precision";
 		};			
@@ -386,11 +386,11 @@ class cfgWeapons
 	class FLAY_acc_Quiver_5P: FLAY_acc_Quiver {
 		displayName = "Quiver (Precision)";
 		descriptionShort = "Bow Mounted Quiver (5 Precision Arrows)";
-		model = "\FLAY\FLAY_Archery\acc\FLAY_quiver_5.p3d"
+		model = "\FLAY\FLAY_Archery\acc\FLAY_quiver_5.p3d";
 		class FLAY_QuiverInfo: FLAY_QuiverInfo {
 			count = 5;
 			next = "FLAY_acc_Quiver_6P";
-			prev = "FLAY_acc_Quiver_4P"
+			prev = "FLAY_acc_Quiver_4P";
 			magazine = "FLAY_7Rnd_PrecisionArrow";
 			point = "FLAY_point_Precision";
 		};			
@@ -402,7 +402,7 @@ class cfgWeapons
 		class FLAY_QuiverInfo: FLAY_QuiverInfo {
 			count = 4;
 			next = "FLAY_acc_Quiver_5P";
-			prev = "FLAY_acc_Quiver_3P"
+			prev = "FLAY_acc_Quiver_3P";
 			magazine = "FLAY_7Rnd_PrecisionArrow";
 			point = "FLAY_point_Precision";
 		};			
@@ -414,7 +414,7 @@ class cfgWeapons
 		class FLAY_QuiverInfo: FLAY_QuiverInfo {
 			count = 3;
 			next = "FLAY_acc_Quiver_4P";
-			prev = "FLAY_acc_Quiver_2P"
+			prev = "FLAY_acc_Quiver_2P";
 			magazine = "FLAY_7Rnd_PrecisionArrow";
 			point = "FLAY_point_Precision";
 		};			
@@ -426,7 +426,7 @@ class cfgWeapons
 		class FLAY_QuiverInfo: FLAY_QuiverInfo {
 			count = 2;
 			next = "FLAY_acc_Quiver_3P";
-			prev = "FLAY_acc_Quiver_1P"
+			prev = "FLAY_acc_Quiver_1P";
 			magazine = "FLAY_7Rnd_PrecisionArrow";
 			point = "FLAY_point_Precision";
 		};			
@@ -438,7 +438,7 @@ class cfgWeapons
 		class FLAY_QuiverInfo: FLAY_QuiverInfo {
 			count = 1;
 			next = "FLAY_acc_Quiver_2P";
-			prev = "FLAY_acc_Quiver_0P"
+			prev = "FLAY_acc_Quiver_0P";
 			magazine = "FLAY_7Rnd_PrecisionArrow";
 			point = "FLAY_point_Precision";
 		};			
@@ -450,7 +450,7 @@ class cfgWeapons
 		class FLAY_QuiverInfo: FLAY_QuiverInfo {
 			count = 0;
 			next = "FLAY_acc_Quiver_1P";
-			prev = "FLAY_acc_Quiver_0P"
+			prev = "FLAY_acc_Quiver_0P";
 			magazine = "FLAY_7Rnd_PrecisionArrow";
 			point = "FLAY_point_Precision";
 		};			
@@ -464,7 +464,7 @@ class cfgWeapons
 		class FLAY_QuiverInfo: FLAY_QuiverInfo {
 			count = 7;
 			next = "FLAY_acc_Quiver_7B";
-			prev = "FLAY_acc_Quiver_6B"
+			prev = "FLAY_acc_Quiver_6B";
 			magazine = "FLAY_7Rnd_BroadheadArrow";
 			point = "FLAY_point_Broadhead";
 		};			
@@ -476,7 +476,7 @@ class cfgWeapons
 		class FLAY_QuiverInfo: FLAY_QuiverInfo {
 			count = 6;
 			next = "FLAY_acc_Quiver_7B";
-			prev = "FLAY_acc_Quiver_5B"
+			prev = "FLAY_acc_Quiver_5B";
 			magazine = "FLAY_7Rnd_BroadheadArrow";
 			point = "FLAY_point_Broadhead";
 		};			
@@ -488,7 +488,7 @@ class cfgWeapons
 		class FLAY_QuiverInfo: FLAY_QuiverInfo {
 			count = 5;
 			next = "FLAY_acc_Quiver_6B";
-			prev = "FLAY_acc_Quiver_4B"
+			prev = "FLAY_acc_Quiver_4B";
 			magazine = "FLAY_7Rnd_BroadheadArrow";
 			point = "FLAY_point_Broadhead";
 		};		
@@ -500,7 +500,7 @@ class cfgWeapons
 		class FLAY_QuiverInfo: FLAY_QuiverInfo {
 			count = 4;
 			next = "FLAY_acc_Quiver_5B";
-			prev = "FLAY_acc_Quiver_3B"
+			prev = "FLAY_acc_Quiver_3B";
 			magazine = "FLAY_7Rnd_BroadheadArrow";
 			point = "FLAY_point_Broadhead";
 		};			
@@ -512,7 +512,7 @@ class cfgWeapons
 		class FLAY_QuiverInfo: FLAY_QuiverInfo {
 			count = 3;
 			next = "FLAY_acc_Quiver_4B";
-			prev = "FLAY_acc_Quiver_2B"
+			prev = "FLAY_acc_Quiver_2B";
 			magazine = "FLAY_7Rnd_BroadheadArrow";
 			point = "FLAY_point_Broadhead";
 		};			
@@ -524,7 +524,7 @@ class cfgWeapons
 		class FLAY_QuiverInfo: FLAY_QuiverInfo {
 			count = 2;
 			next = "FLAY_acc_Quiver_3B";
-			prev = "FLAY_acc_Quiver_1B"
+			prev = "FLAY_acc_Quiver_1B";
 			magazine = "FLAY_7Rnd_BroadheadArrow";
 			point = "FLAY_point_Broadhead";
 		};			
@@ -536,7 +536,7 @@ class cfgWeapons
 		class FLAY_QuiverInfo: FLAY_QuiverInfo {
 			count = 1;
 			next = "FLAY_acc_Quiver_2B";
-			prev = "FLAY_acc_Quiver_0B"
+			prev = "FLAY_acc_Quiver_0B";
 			magazine = "FLAY_7Rnd_BroadheadArrow";
 			point = "FLAY_point_Broadhead";
 		};			
@@ -548,7 +548,7 @@ class cfgWeapons
 		class FLAY_QuiverInfo: FLAY_QuiverInfo {
 			count = 0;
 			next = "FLAY_acc_Quiver_1B";
-			prev = "FLAY_acc_Quiver_0B"
+			prev = "FLAY_acc_Quiver_0B";
 			magazine = "FLAY_7Rnd_BroadheadArrow";
 			point = "FLAY_point_Broadhead";
 		};			
