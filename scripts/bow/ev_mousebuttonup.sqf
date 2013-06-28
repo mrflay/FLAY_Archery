@@ -6,12 +6,9 @@ _ctrl = _this select 0;
 _button = _this select 1;
 
 _weapon = currentWeapon player;
+_muzzle = currentMuzzle player;
 _isBow = isClass (configFile >> "CfgWeapons" >> _weapon >> "FLAY_BowInfo");
 if (not _isBow) exitWith { false; };
-
-if (dialog) then {
-	// fixme: only trigger if inventory dialog is open.
-};
 
 // only run next part if not in inventory dialog
 if (dialog) exitWith { false };
@@ -36,6 +33,7 @@ if (_bowState == "drawn") then {
 					_muzzleIndex = 1;
 				};
 				
+				player selectWeapon _muzzle;
 				_gameLogic = missionNamespace getVariable "flay.archery.mission.gamelogic";
 				_gameLogic action ["UseWeapon", player, player, _weaponIndex + _muzzleIndex];
 				["empty"] call FLAY_fnc_SetBowState;
