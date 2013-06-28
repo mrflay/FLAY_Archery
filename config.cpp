@@ -6,7 +6,7 @@ class CfgPatches
 		requiredversion = 0.1;
 		units[] = {"FLAY_Target_FITA_122"};
 		weapons[] = {"FLAY_CompoundBow","FLAY_RecurveBow"};
-		magazines[] = {"FLAY_1Rnd_Arrow","FLAY_1Rnd_BroadheadArrow","FLAY_1Rnd_ExplosiveArrow","FLAY_1Rnd_SmokeArrow","FLAY_1Rnd_FlareArrow"};
+		magazines[] = {"FLAY_1Rnd_Arrow","FLAY_1Rnd_BroadheadArrow","FLAY_1Rnd_ExplosiveArrow"};
 	};
 };
 
@@ -20,18 +20,6 @@ class AnimationSources;
 
 
 class CfgVehicles {
-
-	//class Man;
-	//class CAManBase {
-	//	class EventHandlers: DefaultEventHandlers {
-	//		init = "_scr = _this execVM ""flay\flay_archery\scripts\bow_init.sqf"";";
-	//		fired = "_this call FLAY_Effects_EH_Fired;";
-	//		killed = "_this call FLAY_Effects_EH_Killed;";
-	//		handledamage = "_this call FLAY_EH_HandleDamage;";
-	//		hitpart = "_this call FLAY_EH_HitPart;";
-	//		hit = "_this call FLAY_EH_Hit;";	
-	//	};
-	//};
 
 	class Static;
 	class FLAY_Arrow: Static
@@ -88,10 +76,6 @@ class CfgWeapons {
 
 		model = "";
 		handanim[] = {"OFP2_ManSkeleton","FLAY\FLAY_Archery\anim\handanim_recurvebow.rtm"};
-		//autoReload = 0;
-		//reloadAction = "GestureReloadArrow";
-		//reloadmagazinesound[] = {"A3\sounds_f\weapons\reloads\new_trg.wav", 0.1, 1, 30};
-		//reloadsound[] = {"", 1, 1};
 		magazines[] = {};
 		
 		class FLAY_BowInfo {
@@ -113,7 +97,7 @@ class CfgWeapons {
 				,"FLAY_1Rnd_ExplosiveArrow"
 			};
 
-			reloadAction = "GestureReloadArrowAndFireAi"; // only used by ai, because player reloads using scripts
+			reloadAction = "GestureReloadBackQuiver"; // only used by ai, because player reloads using scripts
 			discreteDistance[] = {200};
 			discreteDistanceInitIndex = 0;			
 			sound[] = {"",0.00031622776,1};
@@ -173,7 +157,8 @@ class CfgWeapons {
 			class CowsSlot {
 				access = 1;
 				compatibleitems[] = {
-					"optic_Arco"
+					"optic_arco"
+					,"optic_mrco"
 					,"optic_aco"
 					,"optic_ACO_grn"
 					,"optic_hamr"
@@ -239,8 +224,8 @@ class CfgWeapons {
 				,"FLAY_1Rnd_BroadheadArrow"
 				,"FLAY_1Rnd_ExplosiveArrow"
 			};
-			reloadAction = "GestureReloadBackQuiver";
-			unloadAction = "GestureReset";
+			FLAY_reloadAction = "GestureReloadBackQuiver";
+			FLAY_unloadAction = "GestureReset";
 			showEmpty = 1;
 			autoReload = 0; 
 			reloadTime = 0; 
@@ -257,8 +242,8 @@ class CfgWeapons {
 				,"FLAY_7Rnd_BroadheadArrow"
 				,"FLAY_7Rnd_ExplosiveArrow"
 			};
-			reloadAction = "GestureReloadBowQuiver";
-			unloadAction = "GestureReset";
+			FLAY_reloadAction = "GestureReloadBowQuiver";
+			FLAY_unloadAction = "GestureReset";
 			showEmpty = 1;
 			autoReload = 0; 
 			reloadTime = 0; 
@@ -281,21 +266,15 @@ class CfgWeapons {
 		model = "\FLAY\FLAY_Archery\FLAY_CompoundBowLoaded";
 		class ArrowMuzzle: ArrowMuzzle
 		{
-			reloadAction = "GestureReloadArrow";
-			unloadAction = "GestureReloadBackQuiver";
-			autoReload = 0;
-			dispersion = 1;
-			initSpeed = 1;
-			typicalSpeed = 1;			
+			FLAY_reloadAction = "GestureReloadArrow";
+			FLAY_unloadAction = "GestureReloadBackQuiver";
+			autoReload = 0;	
 		};
 		class QuiverMuzzle: QuiverMuzzle
 		{
-			reloadAction = "GestureReloadArrow";
-			unloadAction = "GestureReloadBowQuiver";
+			FLAY_reloadAction = "GestureReloadArrow";
+			FLAY_unloadAction = "GestureReloadBowQuiver";
 			autoReload = 0;
-			dispersion = 1;
-			initSpeed = 1;// test: no effect?
-			typicalSpeed = 1;//test: no effect?
 		};		
 		class Library {
 			libtextdesc = "Compound Bow";
@@ -314,16 +293,16 @@ class CfgWeapons {
 		model = "\FLAY\FLAY_Archery\FLAY_CompoundBowDrawn";	
 		class ArrowMuzzle: ArrowMuzzle
 		{
-			reloadAction = "GestureReset"; // todo: fire animation
-			unloadAction = "GestureReset";
+			FLAY_reloadAction = "GestureReset"; // todo: fire animation
+			FLAY_unloadAction = "GestureReset";
 			autoReload = 0; 
 			reloadTime = 0; 
 			magazineReloadTime = 0;
 		};
 		class QuiverMuzzle: QuiverMuzzle
 		{
-			reloadAction = "GestureReset";  // todo: fire animation
-			unloadAction = "GestureReset";
+			FLAY_reloadAction = "GestureReset";  // todo: fire animation
+			FLAY_unloadAction = "GestureReset";
 			autoReload = 0; 
 			reloadTime = 0; 
 			magazineReloadTime = 0;
@@ -438,7 +417,7 @@ class CfgMagazines {
 		scope = 2;
 		tracersevery = 0;
 		FLAY_point = "";
-		mass = 2;
+		mass = 7;
 	};
 	class FLAY_7Rnd_Arrow : CA_Magazine {
 		displayname = "Arrow";
@@ -453,7 +432,7 @@ class CfgMagazines {
 		scope = 2;
 		tracersevery = 0;
 		FLAY_point = "";
-		mass = 2;
+		mass = 7;
 	};		
 	class FLAY_1Rnd_PrecisionArrow: CA_Magazine
 	{
@@ -471,7 +450,7 @@ class CfgMagazines {
 		nameSound = "";
 		maxLeadSpeed = 50;
 		FLAY_point = "FLAY_point_Precision";
-		mass = 2;
+		mass = 7;
 	};
 	class FLAY_7Rnd_PrecisionArrow: CA_Magazine
 	{
@@ -489,7 +468,7 @@ class CfgMagazines {
 		nameSound = "";
 		maxLeadSpeed = 50;
 		FLAY_point = "FLAY_point_Precision";
-		mass = 2;
+		mass = 7;
 	};	
 	class FLAY_1Rnd_BroadheadArrow: CA_Magazine
 	{
@@ -507,7 +486,7 @@ class CfgMagazines {
 		nameSound = "";
 		maxLeadSpeed = 50;
 		FLAY_point = "FLAY_point_Broadhead";
-		mass = 3;
+		mass = 8;
 	};	
 	class FLAY_7Rnd_BroadheadArrow: CA_Magazine
 	{
@@ -525,7 +504,7 @@ class CfgMagazines {
 		nameSound = "";
 		maxLeadSpeed = 50;
 		FLAY_point = "FLAY_point_Broadhead";
-		mass = 3;
+		mass = 8;
 	};		
 	class FLAY_1Rnd_ExplosiveArrow: CA_Magazine
 	{
@@ -542,7 +521,7 @@ class CfgMagazines {
 		initSpeed = 60;
 		nameSound = "";
 		FLAY_point = "FLAY_point_Explosive";
-		mass = 4;
+		mass = 9;
 	};
 	class FLAY_7Rnd_ExplosiveArrow: CA_Magazine
 	{
@@ -559,7 +538,7 @@ class CfgMagazines {
 		initSpeed = 60;
 		nameSound = "";
 		FLAY_point = "FLAY_point_Explosive";
-		mass = 4;
+		mass = 9;
 	};	
 	class FLAY_1Rnd_FlameArrow: CA_Magazine
 	{
@@ -576,7 +555,7 @@ class CfgMagazines {
 		initSpeed = 60;
 		nameSound = "";
 		FLAY_point = "FLAY_point_Flame";
-		mass = 4;
+		mass = 9;
 	};
 	class FLAY_1Rnd_FlareArrow_Red: CA_Magazine
 	{
@@ -593,7 +572,7 @@ class CfgMagazines {
 		initSpeed = 60;
 		nameSound = "";
 		FLAY_point = "FLAY_point_Flare";
-		mass = 4;
+		mass = 9;
 	};	
 	class FLAY_1Rnd_SmokeArrow: CA_Magazine
 	{
@@ -610,7 +589,7 @@ class CfgMagazines {
 		initSpeed = 60;
 		nameSound = "";
 		FLAY_point = "FLAY_point_Smoke";
-		mass = 4;
+		mass = 9;
 	};
 };
 

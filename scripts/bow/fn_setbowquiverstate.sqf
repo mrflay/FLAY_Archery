@@ -33,7 +33,7 @@ if (_quiver == "") exitWith {
 // ensure a quiver is mounted
 _isQuiver = isClass (configFile >> "CfgWeapons" >> _quiver >> "FLAY_QuiverInfo");
 if (not _isQuiver) exitWith {
-	player globalChat ["fn_setbowquiverstate: '%1' is not a quiver", _quiver];
+	player globalChat format ["fn_setbowquiverstate: '%1' is not a quiver", _quiver];
 	false;
 };
 
@@ -48,8 +48,8 @@ _nextWeapon =  getText (configFile >> "CfgWeapons" >> _weapon >> "FLAY_BowInfo" 
 _nextState =  getText (configFile >> "CfgWeapons" >> _nextWeapon >> "FLAY_BowInfo" >> "state");
 
 // transition animations
-_reloadAction =  getText (configFile >> "CfgWeapons" >> _weapon >> _muzzle >> "reloadAction");
-_unloadAction =  getText (configFile >> "CfgWeapons" >> _weapon >> _muzzle >> "unloadAction");
+_reloadAction =  getText (configFile >> "CfgWeapons" >> _weapon >> _muzzle >> "FLAY_reloadAction");
+_unloadAction =  getText (configFile >> "CfgWeapons" >> _weapon >> _muzzle >> "FLAY_unloadAction");
 
 if (_next == "next" and _animate) then {
 	_unit playActionNow _reloadAction;

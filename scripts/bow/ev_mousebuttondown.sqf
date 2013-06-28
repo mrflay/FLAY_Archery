@@ -8,12 +8,6 @@ _weapon = currentWeapon player;
 _isBow = isClass (configFile >> "CfgWeapons" >> _weapon >> "FLAY_BowInfo");
 if (not _isBow) exitWith { false; };
 
-if (dialog) then {
-	// remember inventory state to see if anything changed,
-	// when mousebutton is released.
-	[] call FLAY_fnc_StoreInventoryState;
-};
-
 // only run next part if not in inventory dialog
 if (dialog) exitWith { false };
 

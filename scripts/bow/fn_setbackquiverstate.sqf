@@ -23,8 +23,8 @@ _nextWeapon =  getText (configFile >> "CfgWeapons" >> _weapon >> "FLAY_BowInfo" 
 _nextState =  getText (configFile >> "CfgWeapons" >> _nextWeapon >> "FLAY_BowInfo" >> "state");
 
 // transition animations
-_reloadAction =  getText (configFile >> "CfgWeapons" >> _weapon >> _muzzle >> "reloadAction");
-_unloadAction =  getText (configFile >> "CfgWeapons" >> _weapon >> _muzzle >> "unloadAction");
+_reloadAction =  getText (configFile >> "CfgWeapons" >> _weapon >> _muzzle >> "FLAY_reloadAction");
+_unloadAction =  getText (configFile >> "CfgWeapons" >> _weapon >> _muzzle >> "FLAY_unloadAction");
 
 if (_next == "next" and _animate) then {
 	_unit playActionNow _reloadAction;
