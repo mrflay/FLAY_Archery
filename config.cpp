@@ -98,7 +98,7 @@ class CfgWeapons {
 			};
 
 			reloadAction = "GestureReloadBackQuiver"; // only used by ai, because player reloads using scripts
-			discreteDistance[] = {200};
+			discreteDistance[] = {30};
 			discreteDistanceInitIndex = 0;			
 			sound[] = {"",0.00031622776,1};
 			reloadSound[] = {"",0.00031622776,1};
@@ -125,11 +125,11 @@ class CfgWeapons {
 			minRangeProbab = 0.8;
 			midRange = 50;
 			midRangeProbab = 0.8;
-			maxRange = 800;
+			maxRange = 200;
 			maxRangeProbab = 0.8;
 
-			value = 10;
-			cost = 0;
+			value = 1000;
+			cost = 1;
 		};
 		
 		class Library {
@@ -138,7 +138,7 @@ class CfgWeapons {
 
 		class WeaponSlotsInfo {
 			allowedslots[] = {901};
-			mass = 4;
+			mass = 60;
 			class MuzzleSlot {
 				access = 1;
 				compatibleitems[] = {

@@ -32,7 +32,7 @@ _this spawn {
 		if (count _arrows > 0) then {
 			_actionId = player getVariable ["flay.archery.state.takeArrowsId", -1];
 			if (_actionId < 0) then {
-				_actionId = player addAction ["Take Arrow(s)", "flay\flay_archery\scripts\bow\fn_takearrows.sqf", [], 6, true, true];
+				_actionId = player addAction ["Take Arrow(s)", "flay\flay_archery\scripts\bow\fn_takearrows.sqf", [], -1000, true, true];
 				player setVariable ["flay.archery.state.takeArrowsId", _actionId];
 			};
 		} else {
@@ -44,4 +44,3 @@ _this spawn {
 		};
 	};
 };
-

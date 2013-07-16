@@ -14,8 +14,15 @@ if (dialog) exitWith { false };
 _bowState =  getText (configFile >> "CfgWeapons" >> _weapon >> "FLAY_BowInfo" >> "state");
 if (_bowState == "loaded") then {
 	if (_button == 0) then {
-		_timeout = time + 0.5;
+		_timeout = time + 0.25;
 		player setVariable ["flay.archery.state.fireOnRelease", _timeout];
+		_handled = true;
+		["next"] call FLAY_fnc_SetBowState;
+	};
+};
+
+if (_bowState == "empty") then {
+	if (_button == 0) then {
 		_handled = true;
 		["next"] call FLAY_fnc_SetBowState;
 	};

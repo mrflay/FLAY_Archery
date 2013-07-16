@@ -4,6 +4,8 @@ _target = _this select 0;
 _caller = _this select 1;
 _id = _this select 2;
 
+player playAction "PutDown";
+
 _arrows = (position player) nearObjects ["FLAY_Arrow", 4];
 { 
 	_arrow = _x;

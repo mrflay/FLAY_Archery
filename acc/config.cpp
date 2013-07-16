@@ -36,7 +36,7 @@ class cfgWeapons
 		model = "\FLAY\FLAY_Archery\acc\FLAY_arrow_Point.p3d";
 		class ItemInfo: ItemInfo
 		{
-			mass = 0.5;
+			mass = 2;
 			class MagazineCoef
 			{
 				initSpeed = 0.6;
@@ -74,7 +74,7 @@ class cfgWeapons
 		displayName = "Precision Point";
 		class ItemInfo: ItemInfo
 		{
-			mass = 0.5;
+			mass = 2;
 			class MagazineCoef
 			{
 				initSpeed = 0.1;
@@ -99,7 +99,7 @@ class cfgWeapons
 		model = "\FLAY\FLAY_Archery\acc\FLAY_arrow_BroadHead.p3d";
 		class ItemInfo: ItemInfo
 		{
-			mass = 0.5;
+			mass = 2;
 			class MagazineCoef
 			{
 				initSpeed = 0.9;
@@ -124,7 +124,7 @@ class cfgWeapons
 		model = "\FLAY\FLAY_Archery\acc\FLAY_arrow_HE.p3d";
 		class ItemInfo: ItemInfo
 		{
-			mass = 1;
+			mass = 3;
 			class MagazineCoef
 			{
 				initSpeed = 0.6;
@@ -166,6 +166,7 @@ class cfgWeapons
 		model = "\FLAY\FLAY_Archery\acc\FLAY_quiver_7.p3d";
 		class ItemInfo: InventoryFlashLightItem_Base_F
 		{
+			mass = 20;
 			RMBhint = "Bow Mounted Quiver";
 			class FlashLight {};
 		};
@@ -565,6 +566,7 @@ class cfgWeapons
 		model = "\FLAY\FLAY_Archery\acc\FLAY_stabilizer.p3d";
 		class ItemInfo: InventoryFlashLightItem_Base_F
 		{
+			mass = 20;
 			RMBhint = "Stabilizer";
 			class FlashLight {};
 		};
