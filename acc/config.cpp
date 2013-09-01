@@ -81,14 +81,29 @@ class cfgWeapons
 			};
 			class AmmoCoef
 			{
-				hit = 0.1;
-				visibleFire = 0;
-				audibleFire = 0;
-				visibleFireTime = 0;
-				audibleFireTime = 0;
+			
+		hit = 16;
+		indirectHit = 10;
+		indirectHitRange = 5;
+		visibleFire = 0;
+		audibleFire = 0;
+		visibleFireTime = 0;
+		audibleFireTime = 0;
+		deflecting = 5;
+		airFriction = -0.001064;
+		fuseDistance = 0;
+		whistleDist = 2;
+		typicalSpeed = 60;
+		timeToLive = 60;
+
+				//hit = 0.1;
+				//visibleFire = 0;
+				//audibleFire = 0;
+				//visibleFireTime = 0;
+				//audibleFireTime = 0;
 				cost = 1.0;
-				typicalSpeed = 0.1;
-				airFriction = 0.5;
+				//typicalSpeed = 0.1;
+				//airFriction = 0.5;
 			};
 		};
 	};	
@@ -191,6 +206,7 @@ class cfgWeapons
 		};
 	};	
 	class FLAY_acc_Quiver_6: FLAY_acc_Quiver {
+		scope = 1;
 		displayName = "Quiver";
 		descriptionShort = "Bow Mounted Quiver (6 Arrows)";
 		model = "\FLAY\FLAY_Archery\acc\FLAY_quiver_6.p3d";
@@ -201,6 +217,7 @@ class cfgWeapons
 		};		
 	};
 	class FLAY_acc_Quiver_5: FLAY_acc_Quiver {
+		scope = 1;
 		displayName = "Quiver";
 		descriptionShort = "Bow Mounted Quiver (5 Arrows)";
 		model = "\FLAY\FLAY_Archery\acc\FLAY_quiver_5.p3d";
@@ -211,6 +228,7 @@ class cfgWeapons
 		};		
 	};
 	class FLAY_acc_Quiver_4: FLAY_acc_Quiver {
+		scope = 1;
 		displayName = "Quiver";
 		descriptionShort = "Bow Mounted Quiver (4 Arrows)";
 		model = "\FLAY\FLAY_Archery\acc\FLAY_quiver_4.p3d";
@@ -221,6 +239,7 @@ class cfgWeapons
 		};		
 	};
 	class FLAY_acc_Quiver_3: FLAY_acc_Quiver {
+		scope = 1;
 		displayName = "Quiver";
 		descriptionShort = "Bow Mounted Quiver (3 Arrows)";
 		model = "\FLAY\FLAY_Archery\acc\FLAY_quiver_3.p3d";
@@ -231,6 +250,7 @@ class cfgWeapons
 		};		
 	};		
 	class FLAY_acc_Quiver_2: FLAY_acc_Quiver {
+		scope = 1;
 		displayName = "Quiver";
 		descriptionShort = "Bow Mounted Quiver (2 Arrows)";
 		model = "\FLAY\FLAY_Archery\acc\FLAY_quiver_2.p3d";
@@ -241,6 +261,7 @@ class cfgWeapons
 		};		
 	};
 	class FLAY_acc_Quiver_1: FLAY_acc_Quiver {
+		scope = 1;
 		displayName = "Quiver";
 		descriptionShort = "Bow Mounted Quiver (1 Arrow)";
 		model = "\FLAY\FLAY_Archery\acc\FLAY_quiver_1.p3d";
@@ -251,6 +272,7 @@ class cfgWeapons
 		};		
 	};
 	class FLAY_acc_Quiver_0: FLAY_acc_Quiver {
+		scope = 1;
 		displayName = "Quiver";
 		descriptionShort = "Bow Mounted Quiver (0 Arrows)";
 		model = "\FLAY\FLAY_Archery\acc\FLAY_quiver_0.p3d";
@@ -275,6 +297,7 @@ class cfgWeapons
 		};		
 	};	
 	class FLAY_acc_Quiver_6HE: FLAY_acc_Quiver {
+		scope = 1;
 		displayName = "Quiver (HE)";
 		descriptionShort = "Bow Mounted Quiver (6 HE Arrows)";
 		model = "\FLAY\FLAY_Archery\acc\FLAY_quiver_6.p3d";
@@ -287,6 +310,7 @@ class cfgWeapons
 		};				
 	};
 	class FLAY_acc_Quiver_5HE: FLAY_acc_Quiver {
+		scope = 1;
 		displayName = "Quiver (HE)";
 		descriptionShort = "Bow Mounted Quiver (5 HE Arrows)";
 		model = "\FLAY\FLAY_Archery\acc\FLAY_quiver_5.p3d";
@@ -299,6 +323,7 @@ class cfgWeapons
 		};				
 	};
 	class FLAY_acc_Quiver_4HE: FLAY_acc_Quiver {
+		scope = 1;
 		displayName = "Quiver (HE)";
 		descriptionShort = "Bow Mounted Quiver (4 HE Arrows)";
 		model = "\FLAY\FLAY_Archery\acc\FLAY_quiver_4.p3d";
@@ -311,6 +336,7 @@ class cfgWeapons
 		};				
 	};
 	class FLAY_acc_Quiver_3HE: FLAY_acc_Quiver {
+		scope = 1;
 		displayName = "Quiver (HE)";
 		descriptionShort = "Bow Mounted Quiver (3 HE Arrows)";
 		model = "\FLAY\FLAY_Archery\acc\FLAY_quiver_3.p3d";
@@ -323,6 +349,7 @@ class cfgWeapons
 		};				
 	};		
 	class FLAY_acc_Quiver_2HE: FLAY_acc_Quiver {
+		scope = 1;
 		displayName = "Quiver (HE)";
 		descriptionShort = "Bow Mounted Quiver (2 HE Arrows)";
 		model = "\FLAY\FLAY_Archery\acc\FLAY_quiver_2.p3d";
@@ -335,6 +362,7 @@ class cfgWeapons
 		};				
 	};
 	class FLAY_acc_Quiver_1HE: FLAY_acc_Quiver {
+		scope = 1;
 		displayName = "Quiver (HE)";
 		descriptionShort = "Bow Mounted Quiver (1 HE Arrow)";
 		model = "\FLAY\FLAY_Archery\acc\FLAY_quiver_1.p3d";
@@ -347,6 +375,7 @@ class cfgWeapons
 		};				
 	};
 	class FLAY_acc_Quiver_0HE: FLAY_acc_Quiver {
+		scope = 1;
 		displayName = "Quiver (HE)";
 		descriptionShort = "Bow Mounted Quiver (0 HE Arrows)";
 		model = "\FLAY\FLAY_Archery\acc\FLAY_quiver_0.p3d";
@@ -373,6 +402,7 @@ class cfgWeapons
 		};				
 	};	
 	class FLAY_acc_Quiver_6P: FLAY_acc_Quiver {
+		scope = 1;
 		displayName = "Quiver (Precision)";
 		descriptionShort = "Bow Mounted Quiver (6 Precision Arrows)";
 		model = "\FLAY\FLAY_Archery\acc\FLAY_quiver_6.p3d";
@@ -385,6 +415,7 @@ class cfgWeapons
 		};			
 	};
 	class FLAY_acc_Quiver_5P: FLAY_acc_Quiver {
+		scope = 1;
 		displayName = "Quiver (Precision)";
 		descriptionShort = "Bow Mounted Quiver (5 Precision Arrows)";
 		model = "\FLAY\FLAY_Archery\acc\FLAY_quiver_5.p3d";
@@ -397,6 +428,7 @@ class cfgWeapons
 		};			
 	};
 	class FLAY_acc_Quiver_4P: FLAY_acc_Quiver {
+		scope = 1;
 		displayName = "Quiver (Precision)";
 		descriptionShort = "Bow Mounted Quiver (4 Precision Arrows)";
 		model = "\FLAY\FLAY_Archery\acc\FLAY_quiver_4.p3d";
@@ -409,6 +441,7 @@ class cfgWeapons
 		};			
 	};
 	class FLAY_acc_Quiver_3P: FLAY_acc_Quiver {
+		scope = 1;
 		displayName = "Quiver (Precision)";
 		descriptionShort = "Bow Mounted Quiver (3 Precision Arrows)";
 		model = "\FLAY\FLAY_Archery\acc\FLAY_quiver_3.p3d";
@@ -421,6 +454,7 @@ class cfgWeapons
 		};			
 	};		
 	class FLAY_acc_Quiver_2P: FLAY_acc_Quiver {
+		scope = 1;
 		displayName = "Quiver (Precision)";
 		descriptionShort = "Bow Mounted Quiver (2 Precision Arrows)";
 		model = "\FLAY\FLAY_Archery\acc\FLAY_quiver_2.p3d";
@@ -433,6 +467,7 @@ class cfgWeapons
 		};			
 	};
 	class FLAY_acc_Quiver_1P: FLAY_acc_Quiver {
+		scope = 1;
 		displayName = "Quiver (Precision)";
 		descriptionShort = "Bow Mounted Quiver (1 Precision Arrow)";
 		model = "\FLAY\FLAY_Archery\acc\FLAY_quiver_1.p3d";
@@ -445,6 +480,7 @@ class cfgWeapons
 		};			
 	};
 	class FLAY_acc_Quiver_0P: FLAY_acc_Quiver {
+		scope = 1;
 		displayName = "Quiver (Precision)";
 		descriptionShort = "Bow Mounted Quiver (0 Precision Arrows)";
 		model = "\FLAY\FLAY_Archery\acc\FLAY_quiver_0.p3d";
@@ -471,6 +507,7 @@ class cfgWeapons
 		};			
 	};	
 	class FLAY_acc_Quiver_6B: FLAY_acc_Quiver {
+		scope = 1;
 		displayName = "Quiver (Broadhead)";
 		descriptionShort = "Bow Mounted Quiver (6 Broadhead Arrows)";
 		model = "\FLAY\FLAY_Archery\acc\FLAY_quiver_6.p3d";
@@ -483,6 +520,7 @@ class cfgWeapons
 		};			
 	};
 	class FLAY_acc_Quiver_5B: FLAY_acc_Quiver {
+		scope = 1;
 		displayName = "Quiver (Broadhead)";
 		descriptionShort = "Bow Mounted Quiver (5 Broadhead Arrows)";
 		model = "\FLAY\FLAY_Archery\acc\FLAY_quiver_5.p3d";
@@ -495,6 +533,7 @@ class cfgWeapons
 		};		
 	};
 	class FLAY_acc_Quiver_4B: FLAY_acc_Quiver {
+		scope = 1;
 		displayName = "Quiver (Broadhead)";
 		descriptionShort = "Bow Mounted Quiver (4 Broadhead Arrows)";
 		model = "\FLAY\FLAY_Archery\acc\FLAY_quiver_4.p3d";
@@ -507,6 +546,7 @@ class cfgWeapons
 		};			
 	};
 	class FLAY_acc_Quiver_3B: FLAY_acc_Quiver {
+		scope = 1;
 		displayName = "Quiver (Broadhead)";
 		descriptionShort = "Bow Mounted Quiver (3 Broadhead Arrows)";
 		model = "\FLAY\FLAY_Archery\acc\FLAY_quiver_3.p3d";
@@ -519,6 +559,7 @@ class cfgWeapons
 		};			
 	};		
 	class FLAY_acc_Quiver_2B: FLAY_acc_Quiver {
+		scope = 1;
 		displayName = "Quiver (Broadhead)";
 		descriptionShort = "Bow Mounted Quiver (2 Broadhead Arrows)";
 		model = "\FLAY\FLAY_Archery\acc\FLAY_quiver_2.p3d";
@@ -531,6 +572,7 @@ class cfgWeapons
 		};			
 	};
 	class FLAY_acc_Quiver_1B: FLAY_acc_Quiver {
+		scope = 1;
 		displayName = "Quiver (Broadhead)";
 		descriptionShort = "Bow Mounted Quiver (1 Broadhead Arrow)";
 		model = "\FLAY\FLAY_Archery\acc\FLAY_quiver_1.p3d";
@@ -543,6 +585,7 @@ class cfgWeapons
 		};			
 	};
 	class FLAY_acc_Quiver_0B: FLAY_acc_Quiver {
+		scope = 1;
 		displayName = "Quiver (Broadhead)";
 		descriptionShort = "Bow Mounted Quiver (0 Broadhead Arrows)";
 		model = "\FLAY\FLAY_Archery\acc\FLAY_quiver_0.p3d";

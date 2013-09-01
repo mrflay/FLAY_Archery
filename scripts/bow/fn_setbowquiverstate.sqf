@@ -86,7 +86,7 @@ if (_state == "loaded" and _next == "prev") then {
 	// handle arrow point
 	_arrowPoint = _items select 0;
 	if (_arrowPoint != "") then {
-		_unit removePrimaryWeaponItem _point;
+		_unit removePrimaryWeaponItem _arrowPoint;
 		//_unit addItem _point;
 	};	
 };

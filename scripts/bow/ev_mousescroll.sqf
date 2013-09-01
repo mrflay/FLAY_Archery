@@ -1,5 +1,8 @@
 disableserialization;
 
+_disabled = missionNamespace getVariable ["flay.archery.cfg.noscroll", true];
+if (_disabled) exitWith { false };
+
 _ctrl = _this select 0;
 _button = _this select 1;
 

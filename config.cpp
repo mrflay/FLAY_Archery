@@ -255,7 +255,7 @@ class CfgWeapons {
 	};
 	
 	class FLAY_CompoundBowLoaded: FLAY_CompoundBow {
-		scope = 2;
+		scope = 1;
 		class FLAY_BowInfo: FLAY_BowInfo {
 			scope = 2;
 			state = "loaded";
@@ -282,7 +282,7 @@ class CfgWeapons {
 	};
 	
 	class FLAY_CompoundBowDrawn: FLAY_CompoundBow {
-		scope = 2;
+		scope = 1;
 		class FLAY_BowInfo: FLAY_BowInfo {
 			scope = 2;
 			state = "drawn";
@@ -343,7 +343,7 @@ class CfgWeapons {
 	};
 	
 	class FLAY_RecurveBowLoaded: FLAY_CompoundBowLoaded {
-		scope = 2;
+		scope = 1;
 		class FLAY_BowInfo: FLAY_BowInfo {
 			scope = 2;
 			state = "loaded";
@@ -372,7 +372,7 @@ class CfgWeapons {
 	};
 	
 	class FLAY_RecurveBowDrawn: FLAY_CompoundBowDrawn {
-		scope = 2;
+		scope = 1;
 		class FLAY_BowInfo: FLAY_BowInfo {
 			scope = 2;
 			state = "drawn";
@@ -398,7 +398,76 @@ class CfgWeapons {
 		class Library {
 			libtextdesc = "Recurve Bow";
 		};
-	};		
+	};
+	
+	// Variants
+	
+	class FLAY_CompoundBow_Quiver_7HE: FLAY_CompoundBow 
+	{
+		displayName = "Compound Bow (HE7)";
+		class LinkedItems
+		{
+			class LinkedItemsOptic
+			{
+				slot = "CowsSlot";
+				item = "optic_aco";
+			};
+			class LinkedItemsAcc
+			{
+				slot = "PointerSlot";
+				item = "FLAY_acc_Quiver_7HE";
+			};	
+		};	
+	};
+	
+	class FLAY_CompoundBow_Quiver_7B: FLAY_CompoundBow 
+	{
+		displayName = "Compound Bow (HE7)";
+		class LinkedItems
+		{
+			class LinkedItemsAcc
+			{
+				slot = "PointerSlot";
+				item = "FLAY_acc_Quiver_7B";
+			};	
+		};	
+	};	
+	
+	class FLAY_RecurveBow_Stabilizer: FLAY_RecurveBow 
+	{
+		displayName = "Recurve Bow (STB)";
+		class LinkedItems
+		{
+			class LinkedItemsOptic
+			{
+				slot = "CowsSlot";
+				item = "optic_aco";
+			};
+			class LinkedItemsAcc
+			{
+				slot = "PointerSlot";
+				item = "FLAY_acc_Stabilizer";
+			};	
+		};
+	};
+	
+	class FLAY_RecurveBow_ACO: FLAY_RecurveBow 
+	{
+		displayName = "Recurve Bow (STB)";
+		class LinkedItems
+		{
+			class LinkedItemsOptic
+			{
+				slot = "CowsSlot";
+				item = "optic_aco";
+			};
+			class LinkedItemsAcc
+			{
+				slot = "PointerSlot";
+				item = "acc_flashlight";
+			};				
+		};
+	};	
 };
 
 class CfgMagazines {
@@ -748,7 +817,14 @@ class CfgMovesBasic
 // GESTURES
 // ===========================================================================
 
-
+class CfgMovesMaleSdr : CfgMovesBasic {	
+	class States {
+		class AmovPknlMstpSrasWrflDnon;
+		class AmovPknlMstpSrasWbowDnon : AmovPknlMstpSrasWrflDnon {
+			aimPrecision = 0.01;
+		};
+	};
+};
 class CfgGesturesMale
 {
 	class Default;
@@ -775,6 +851,7 @@ class CfgGesturesMale
 			disableWeapons=0;
 			canReload=1;
 			enableOptics = 1;
+			aimPrecision = 0;
 		};		
 
 		class GestureReloadArrowAndFireAi: Default
@@ -819,5 +896,26 @@ class CfgGesturesMale
 			rightHandIKCurve[] = {0,1,0.05,0,0.95,0,1,1};
 			enableOptics = 1;
 		};		
+	};
+};
+
+class CfgFunctions
+{
+	class FLAY
+	{
+		tag = "FLAY";
+		class archery_bow
+		{
+			file = "\FLAY\FLAY_Archery\scripts\bow";
+			class BowActive {};
+			class CanReloadBow {};
+			class ReloadBow {};
+			class UnloadBow {};
+			class SetBowState {};
+			class SetBowQuiverState {};
+			class SetBackQuiverState {};
+			class FilterMagazines {};
+			class ApplyInventoryState {};
+		};
 	};
 };

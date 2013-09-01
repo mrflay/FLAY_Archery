@@ -17,9 +17,8 @@ if (_key in _inventoryKeys) then {
 		uiNamespace setVariable ["flay.archery.inventory.open", true];
 		[] spawn {
 			waitUntil { dialog };
-			[] call FLAY_fnc_StoreInventoryState;
 			_olditems = primaryWeaponItems player;
-			_oldpoint = _items select 0;
+			_oldpoint = _olditems select 0;
 			_oldmagazine = primaryWeaponMagazine player;
 			_oldmagazine = if (count _oldmagazine == 0) then {""} else {_oldmagazine select 0};
 			while { dialog } do {
