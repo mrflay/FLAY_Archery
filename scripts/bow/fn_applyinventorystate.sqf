@@ -1,4 +1,4 @@
-
+/*
 disableserialization;
 private ["_unit","_isBow","_weapon","_newItems","_newMuzzleAcc","_newMagazine", "_magazines"];
 
@@ -43,4 +43,4 @@ if (_newMagazine != "") then {
 if (_newMagazine == "") then {
 	["empty", false] call FLAY_fnc_SetBowState;
 };
-
+*/

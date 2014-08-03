@@ -97,9 +97,9 @@ _magazines =  magazines _unit;
 
 // returns two element array with magazines for current muzzle in first entry
 // and all other magazines in second entry.
-_filteredMagazines = [_magazines, _weapon, _muzzle] call FLAY_fnc_FilterMagazines;
+_magazines = [_magazines, _weapon, _muzzle] call FLAY_fnc_FilterMagazines;
 
-_unit removeWeapon _weapon;
+//_unit removeWeapon _weapon;
 { _unit removeMagazines _x; } forEach _magazines; // ensures that weapon is not auto loaded
 
 if (_nextState == "empty") then {
@@ -117,13 +117,10 @@ if (_nextState == "loaded") then {
 	
 	// reload
 	if (_state == "empty") then {
-		{ _unit addMagazine _x; } forEach (_filteredMagazines select 0);
+		{ _unit addMagazine _x; } forEach _magazines;
 		// add weapon
 		_unit addWeapon _nextWeapon;
 		_unit selectWeapon _muzzle;
-		// add magazines for other weapon / muzzles after weapon to prevent
-		// auto-loading them (which will make them disappear when switching state).
-		{ _unit addMagazine _x; } forEach (_filteredMagazines select 1);
 	};
 	
 	// unload

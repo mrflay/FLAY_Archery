@@ -14,8 +14,17 @@ if (not _isBow) exitWith { false; };
 // don't trigger when (any) dialog is shown.
 if (dialog) exitWith { false };
 
-_reload = (not _shift and _key in _reloadKeys);
-_unload = (_shift and _key in _reloadKeys);
+_reload = false;
+_unload = false;
+
+_bowState =  getText (configFile >> "CfgWeapons" >> _weapon >> "FLAY_BowInfo" >> "state");
+if (_key in _reloadKeys) then {
+	if (_bowState == "empty") then {
+		_reload = true;
+	} else {
+		_unload = true;
+	};
+};
 
 if (_reload or _unload) then {
 	_action = if (_reload) then {"reload"} else {"unload"};

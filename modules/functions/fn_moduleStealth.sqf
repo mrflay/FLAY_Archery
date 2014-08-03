@@ -7,6 +7,8 @@ _logic = [_this,0,objNull,[objNull]] call BIS_fnc_param;
 _units = [_this,1,[],[[]]] call BIS_fnc_param;
 _activated = [_this,2,true,[true]] call BIS_fnc_param;
 
+missionNamespace setVariable ["flay.archery.module", _logic];
+
 FLAY_stealth_IsStealthKillCallback = {
 
 	private ["_target", "_selection", "_damage","_unit","_projectile","_stealthKilled"];
@@ -95,7 +97,7 @@ FLAY_stealth_OnDeadBodyDetected = {
 };
 
 FLAY_stealth_DeadBodyHandler = {
-	private ["_x","_detected","_deadbody","_killer", "_units","_xlos","_deadbodySide","_onDeadBodyDetected"];
+	private ["_x","_detected","_deadbody","_killer", "_units","_xlos","_deadbodySide","_onDeadBodyDetected","_module","_maxBodyDetectRange","_maxBodyDetectFov"];
 	_detected = false;
 	_deadbody = _this select 0;
 	_killer = _this select 3;
@@ -103,12 +105,15 @@ FLAY_stealth_DeadBodyHandler = {
 	_onDeadBodyDetected = missionNamespace getVariable ["flay.stealth.onDeadBodyDetected", FLAY_stealth_OnDeadBodyDetected];
 	_posASL = getPosASL _deadbody;
 	// TODO: likelihood of detection should depend of weather, timeofday, and how long the body has been dead.
+	_module = missionNamespace getVariable "flay.archery.module";
+	_maxBodyDetectRange = _module getVariable ["MaxBodyDetectRange", 50];
+	_maxBodyDetectFov = _module getVariable ["MaxBodyDetectFov", 130];
 	while { not _detected } do {
-		_units = (position _deadbody) nearEntities ["Man", 50]; 
+		_units = (position _deadbody) nearEntities ["Man", _maxBodyDetectRange]; 
 		{
     		if (alive _x && (side _x == _deadbodySide)) then {
 				// TODO: base fov on distance.
-    			_xlos = [_x, _deadbody, 50, 130] call FLAY_stealth_InLineOfSight;
+    			_xlos = [_x, _deadbody, _maxBodyDetectRange, _maxBodyDetectFov] call FLAY_stealth_InLineOfSight;
     			if (_xlos) then {
     				[_deadbody, _x, _killer] call _onDeadBodyDetected;
     				_detected = true;

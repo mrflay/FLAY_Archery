@@ -100,6 +100,7 @@ class CfgVehicles
 					{
 						name = "$STR_lib_info_yes";
 						value = 1;
+						default = 0;
 					};
 					class No
 					{
@@ -108,7 +109,68 @@ class CfgVehicles
 						default = 1;
 					};
 				};
+			};
+			class MaxBodyDetectRange
+  			{
+				displayName = "Body Detect Distance";
+				description = "Maximum distance dead bodies can be detected"; 
+				typeName = "NUMBER";
+				class Values
+				{
+					class OFF
+					{
+						name = "Off";
+						value = 0;
+						default = 0;
+					};
+					class NEAR
+					{
+						name = "Near (10m)";
+						value = 10;
+						default = 0;
+					};
+					class MEDIUM
+					{
+						name = "Medium (50m)";
+						value = 50;
+						default = 1;
+					};
+					class FAR
+					{
+						name = "Far (150m)";
+						value = 150;
+						default = 0;
+					};					
+				};
 			};			
+			class MaxBodyDetectFov
+  			{
+				displayName = "Body Detect FOV";
+				description = "Field of view for detecting dead bodies"; 
+				typeName = "NUMBER";
+				class Values
+				{
+					class NARROW
+					{
+						name = "Narrow (50 deg)";
+						value = 50;
+						default = 0;
+					};
+					class DEFAULT
+					{
+						name = "Default (130 deg)";
+						value = 130;
+						default = 1;
+					};
+					class WIDE
+					{
+						name = "Wide (200 deg)";
+						value = 200;
+						default = 0;
+					};					
+				};
+			};			
+			
 		};
 		class ModuleDescription: ModuleDescription
 		{

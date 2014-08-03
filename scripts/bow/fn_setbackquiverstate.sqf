@@ -9,11 +9,11 @@ if (count _this > 1) then {
 	_animate = _this select 1;
 };
 
-_magazines = magazines _unit;
-//_magazine = currentMagazine _unit;
 _weapon = currentWeapon _unit;
 _muzzle = currentMuzzle _unit;
 _items = primaryWeaponItems _unit;
+_magazines = backpackItems  _unit;
+_magazines = [_magazines, _weapon, _muzzle] call FLAY_fnc_filterMagazines;
 
 _magazine = primaryWeaponMagazine _unit;
 _magazine = if (count _magazine == 0) then {""} else {_magazine select 0};
@@ -39,17 +39,17 @@ if (_state == "empty" and _nextState == "loaded" and _animate) then {
 };
 
 _unit removeWeapon _weapon;
-{ _unit removeMagazines _x; } forEach _magazines; // ensures that weapon is not auto loaded
+{ _unit removeItemFromBackpack _x; } forEach _magazines; // ensures that weapon is not auto loaded
 
 if (_nextState == "empty") then {
 	// add weapon first
 	_unit addWeapon _nextWeapon;
 	_unit selectWeapon _muzzle;
 	// add magazines
-	{ _unit addMagazine _x; } forEach _magazines;
+	{ _unit addItemToBackpack _x; } forEach _magazines;
 	if (_state == "loaded" and (not dialog)) then {
 		if (_magazine != "") then {
-			_unit addMagazine _magazine;
+			_unit addItemToBackpack _magazine;
 		};
 	};
 };
@@ -60,85 +60,53 @@ if (_nextState == "loaded") then {
 	if (_state == "empty") then {
 		// fixme: perhaps add a special state when loading from inventory?
 		// add loaded magazine first (special case when working with inventory)
-		if (_magazine != "") then {
-			_unit addMagazine _magazine;
-		} else {
-			{ _unit addMagazine _x; } forEach _magazines;
-		};
+		//if (_magazine != "") then {
+		//	_unit addItemToBackpack _magazine;
+		//} else {
+		//	{ _unit addItemToBackpack _x; } forEach _magazines;
+		//};
+		
 		// add weapon
 		_unit addWeapon _nextWeapon;
 		_unit selectWeapon _muzzle;
 		// add remaining magazines	(special case when working with inventory)
-		if (_magazine != "") then {
-			{ _unit addMagazine _x; } forEach _magazines;
-		};
+		//if (_magazine != "") then {
+			{ _unit addItemToBackpack _x; } forEach _magazines;
+		//};
 	};
-	
-	// this is a special case when working with inventory
-	// currently loaded magazine is replaced with another one
-	if (_state == "loaded") then {
-		if (_magazine != "") then {
-			_unit addMagazine _magazine;
-		};
-		// add weapon
-		_unit addWeapon _nextWeapon;
-		_unit selectWeapon _muzzle;
-		// add remaining magazines	(special case when working with inventory)
-		{ _unit addMagazine _x; } forEach _magazines;
-	};	
-	
+		
 	// unload
 	if (_state == "drawn") then {
 		// add loaded magazine first
-		_unit addMagazine _magazine;
+		//_unit addItemToBackpack _magazine;
 		// add weapon
 		_unit addWeapon _nextWeapon;
 		_unit selectWeapon _muzzle;	
 		// add remaining magazines
-		{ _unit addMagazine _x; } forEach _magazines;
+		//{ _unit addItemToBackpack _x; } forEach _magazines;
 	};
-	
-	// ensure the arrow point is updated according to loaded magazine
-	_magazine = currentMagazine _unit;
-	_magazineHasPoint = isText (configFile >> "CfgMagazines" >> _magazine >> "FLAY_Point");
-	if (_magazineHasPoint) then {
-		_magazinePoint = getText (configFile >> "CfgMagazines" >> _magazine >> "FLAY_Point");
-		if (_magazinePoint != "") then {
-			_unit addPrimaryWeaponItem _magazinePoint;
-		} else {
-			_currentPoint = _items select 0;
-			_unit removePrimaryWeaponItem _currentPoint;
-		};
-		//_currentPoint = _items select 0;
-		//if (_currentPoint == "") then {
-		//	_unit addItem _magazinePoint;
-		//};	
+	if (_magazine != "") then {
+		_unit addItemToBackpack _magazine;
 	};
 };
 
 if (_nextState == "drawn") then {
 	// add the currently loaded magazine first
 	if (_magazine != "") then {
-		_unit addMagazine _magazine;
+		_unit addItemToBackpack _magazine;
 	};
 	// add weapon
 	_unit addWeapon _nextWeapon;
 	_unit selectWeapon _muzzle;
 	// add remaining magazines
-	{ _unit addMagazine _x; } forEach _magazines;
-};
-
-// add point to inventory before removing it
-if (_state == "loaded" and _nextState == "empty") then {
-	_point = _items select 0;
-	//if (_point != "") then {
-	//	_unit addItem _point;
-	//};
+	{ _unit addItemToBackpack _x; } forEach _magazines;
 };
 
 // drop the arrow point when bow is fired
 if (_nextState == "empty") then {
-	_items = [_items select 1, _items select 2];
+	if (_state == "drawn") then {
+		_items = [_items select 1, _items select 2];
+	};
 };
 
 // add all attachments

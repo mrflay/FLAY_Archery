@@ -25,7 +25,7 @@ class cfgVehicles
 	class FLAY_C_Archer_Base: C_man_1
 	{
 		scope = 1;
-		_generalMacro = "FLAY_C_Archer_Base";
+		//_generalMacro = "FLAY_C_Archer_Base";
 		displayName = "Archer";
 		textSingular = "Archer";
 		textPlural = "Archers";		
@@ -47,7 +47,7 @@ class cfgVehicles
 	{
 		scope = 2;
 		nameSound = "veh_infantry_SF_s";
-		_generalMacro = "FLAY_C_Archer_Base";
+		//_generalMacro = "FLAY_C_Archer_Base";
 		displayName = "Archer (Compound Bow)";
 		cost = 100000;
 		threat[] = {1,0.3,0.3};
@@ -69,7 +69,7 @@ class cfgVehicles
 	{
 		scope = 2;
 		nameSound = "veh_infantry_SF_s";
-		_generalMacro = "FLAY_C_Archer_Base";
+		//_generalMacro = "FLAY_C_Archer_Base";
 		displayName = "Archer (Recurve Bow)";
 		cost = 100000;
 		threat[] = {1,0.3,0.3};
@@ -92,7 +92,7 @@ class cfgVehicles
 		scope = 1;
 		textSingular = "Archer";
 		textPlural = "Archers";
-		_generalMacro = "FLAY_I_Archer_Base";
+		//_generalMacro = "FLAY_I_Archer_Base";
 		displayName = "FLAY_I_Archer_Base";
 		vehicleClass = "MenArcher";
 		cost = 55000;
@@ -108,7 +108,7 @@ class cfgVehicles
 	{
 		scope = 2;
 		nameSound = "veh_infantry_SF_s";
-		_generalMacro = "FLAY_I_Archer_Base";
+		//_generalMacro = "FLAY_I_Archer_Base";
 		displayName = "Archer (Compound Bow)";
 		cost = 100000;
 		threat[] = {1,0.3,0.3};
@@ -132,7 +132,7 @@ class cfgVehicles
 	{
 		scope = 2;
 		nameSound = "veh_infantry_SF_s";
-		_generalMacro = "FLAY_I_Archer_Base";
+		//_generalMacro = "FLAY_I_Archer_Base";
 		displayName = "Archer (Recurve Bow)";
 		cost = 100000;
 		threat[] = {1,0.3,0.3};
@@ -157,7 +157,7 @@ class cfgVehicles
 		scope = 1;
 		textSingular = "Archer";
 		textPlural = "Archers";
-		_generalMacro = "FLAY_B_Archer_Base";
+		//_generalMacro = "FLAY_B_Archer_Base";
 		displayName = "FLAY_B_Archer_Base";
 		vehicleClass = "MenArcher";
 		cost = 55000;
@@ -173,7 +173,7 @@ class cfgVehicles
 	{
 		scope = 2;
 		nameSound = "veh_infantry_SF_s";
-		_generalMacro = "FLAY_B_Archer_Base";
+		//_generalMacro = "FLAY_B_Archer_Base";
 		displayName = "Archer (Compound Bow)";
 		cost = 100000;
 		threat[] = {1,0.3,0.3};
@@ -197,7 +197,7 @@ class cfgVehicles
 	{
 		scope = 2;
 		nameSound = "veh_infantry_SF_s";
-		_generalMacro = "FLAY_B_Archer_Base";
+		//_generalMacro = "FLAY_B_Archer_Base";
 		displayName = "Archer (Recurve Bow)";
 		cost = 100000;
 		threat[] = {1,0.3,0.3};
@@ -222,7 +222,7 @@ class cfgVehicles
 		scope = 1;
 		textSingular = "Archer";
 		textPlural = "Archers";
-		_generalMacro = "FLAY_O_Archer_Base";
+		//_generalMacro = "FLAY_O_Archer_Base";
 		displayName = "FLAY_O_Archer_Base";
 		vehicleClass = "MenArcher";
 		cost = 55000;
@@ -238,7 +238,7 @@ class cfgVehicles
 	{
 		scope = 2;
 		nameSound = "veh_infantry_SF_s";
-		_generalMacro = "FLAY_O_Archer_Base";
+		//_generalMacro = "FLAY_O_Archer_Base";
 		displayName = "Archer (Compound Bow)";
 		cost = 100000;
 		threat[] = {1,0.3,0.3};
@@ -262,7 +262,7 @@ class cfgVehicles
 	{
 		scope = 2;
 		nameSound = "veh_infantry_SF_s";
-		_generalMacro = "FLAY_O_Archer_Base";
+		//_generalMacro = "FLAY_O_Archer_Base";
 		displayName = "Archer (Recurve Bow)";
 		cost = 100000;
 		threat[] = {1,0.3,0.3};

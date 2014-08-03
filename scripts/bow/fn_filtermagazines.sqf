@@ -6,8 +6,7 @@ _muzzle = _this select 2;
 
 _compatibleMagazines =  getArray (configFile >> "CfgWeapons" >> _weapon >> _muzzle >> "magazines");
 _result = [];
-_result1 = [];
 
-{ if (_x in _compatibleMagazines) then { _result = _result + [_x]; } else { _result1 = _result1 + [_x]; }; } forEach _magazines;
+{ if (_x in _compatibleMagazines) then { _result = _result + [_x]; }; } forEach _magazines;
 
-[_result, _result1];
+_result;

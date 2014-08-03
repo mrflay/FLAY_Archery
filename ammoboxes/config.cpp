@@ -12,8 +12,8 @@ class CfgPatches
 
 class CfgVehicles
 {
-	class Box_NATO_Ammo_F;
-	class FLAY_Archery_AmmoBox:	Box_NATO_Ammo_F
+	class Box_IND_Support_F;
+	class FLAY_Archery_AmmoBox:	Box_IND_Support_F
 	{
 		scope = 2;
 		displayName = "[Archery] Ammo";
@@ -78,7 +78,7 @@ class CfgVehicles
 			};
 			class _xx_FLAY_point_Explosive
 			{
-				name = "FLAY_point_Explosive"
+				name = "FLAY_point_Explosive";
 				count = 50;
 			};
 			class _xx_FLAY_acc_quiver_7

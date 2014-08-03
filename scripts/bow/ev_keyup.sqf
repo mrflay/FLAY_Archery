@@ -9,6 +9,8 @@ _weapon = currentWeapon player;
 _isBow = isClass (configFile >> "CfgWeapons" >> _weapon >> "FLAY_BowInfo");
 if (not _isBow) exitWith { false; };
 
+if (true) exitWith { false; };
+
 //player globalchat format ["keyup:%1, dialog:%2", _key, str dialog];
 
 if (_key in _inventoryKeys) then {

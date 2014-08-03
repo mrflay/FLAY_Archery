@@ -200,8 +200,8 @@ class CfgWeapons {
 		displayName = "Compound Bow";
 		descriptionshort = "Compound Bow<br />Draw Length: 28""<br />Draw Weight: 65 lbs<br />String: 58.5""";		
 		picture = "\FLAY\FLAY_Archery\UI\gear_flay_nighthawk_x_ca";
-		model = "\FLAY\FLAY_Archery\FLAY_CompoundBow";
-		handanim[] = {"OFP2_ManSkeleton","FLAY\FLAY_Archery\anim\handanim_compoundbow.rtm"};
+		model = "\FLAY\FLAY_Archery\FLAY_CompoundBow2";
+		handanim[] = {"OFP2_ManSkeleton","FLAY\FLAY_Archery\anim\handanim_compoundbow2.rtm"};
 		muzzles[] = {"ArrowMuzzle","QuiverMuzzle"};
 		class FLAY_BowInfo: FLAY_BowInfo {
 			scope = 2;
@@ -263,7 +263,7 @@ class CfgWeapons {
 			next = "FLAY_CompoundBowDrawn";
 		};
 		displayName = "Compound Bow (loaded)";
-		model = "\FLAY\FLAY_Archery\FLAY_CompoundBowLoaded";
+		model = "\FLAY\FLAY_Archery\FLAY_CompoundBow2Loaded";
 		class ArrowMuzzle: ArrowMuzzle
 		{
 			FLAY_reloadAction = "GestureReloadArrow";
@@ -290,7 +290,7 @@ class CfgWeapons {
 			next = "FLAY_CompoundBowDrawn";
 		};
 		displayName = "Compound Bow (drawn)";
-		model = "\FLAY\FLAY_Archery\FLAY_CompoundBowDrawn";	
+		model = "\FLAY\FLAY_Archery\FLAY_CompoundBow2Drawn";	
 		class ArrowMuzzle: ArrowMuzzle
 		{
 			FLAY_reloadAction = "GestureReset"; // todo: fire animation
@@ -467,7 +467,7 @@ class CfgWeapons {
 				item = "acc_flashlight";
 			};				
 		};
-	};	
+	};
 };
 
 class CfgMagazines {
